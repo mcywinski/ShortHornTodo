@@ -16,7 +16,7 @@ namespace ShortHorn.Models.Management
         /// The constructor.
         /// </summary>
         /// <param name="container">The database context.</param>
-        public UserManager(ShorthornDb context) : base(context) { }
+        public UserManager(shorthornDb context) : base(context) { }
 
         /// <summary>
         /// Retrieves a specific user based on login criteria

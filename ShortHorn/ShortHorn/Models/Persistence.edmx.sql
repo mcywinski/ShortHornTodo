@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/15/2014 23:14:46
+-- Date Created: 10/15/2014 23:57:20
 -- Generated from EDMX file: C:\dev\ShortHornTodo\ShortHorn\ShortHorn\Models\Persistence.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,32 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_UserLoginToken]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LoginTokens] DROP CONSTRAINT [FK_UserLoginToken];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TodoListTodoItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TodoItems] DROP CONSTRAINT [FK_TodoListTodoItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserTodoList]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TodoLists] DROP CONSTRAINT [FK_UserTodoList];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[LoginTokens]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LoginTokens];
+GO
+IF OBJECT_ID(N'[dbo].[TodoLists]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TodoLists];
+GO
+IF OBJECT_ID(N'[dbo].[TodoItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TodoItems];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -36,7 +57,7 @@ CREATE TABLE [dbo].[Users] (
     [Active] bit  NOT NULL,
     [ActivationToken] nvarchar(128)  NOT NULL,
     [PrivilegeLevel] int  NOT NULL,
-    [DateRegistered] nvarchar(max)  NOT NULL,
+    [DateRegistered] datetime  NOT NULL,
     [DateActivated] datetime  NULL,
     [DateLastLogin] datetime  NULL
 );

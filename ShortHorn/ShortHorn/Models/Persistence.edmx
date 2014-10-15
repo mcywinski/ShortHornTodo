@@ -34,7 +34,7 @@
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="ActivationToken" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="PrivilegeLevel" Type="int" Nullable="false" DefaultValue="0" />
-    <Property Name="DateRegistered" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateRegistered" Type="datetime" Nullable="false" />
     <Property Name="DateActivated" Type="datetime" Nullable="true" />
     <Property Name="DateLastLogin" Type="datetime" Nullable="true" />
   </EntityType>
@@ -138,7 +138,7 @@
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="false" />
           <Property Name="ActivationToken" Type="String" Nullable="false" MaxLength="128" />
           <Property Name="PrivilegeLevel" Type="Int32" Nullable="false" DefaultValue="0" />
-          <Property Name="DateRegistered" Type="String" Nullable="false" />
+          <Property Name="DateRegistered" Type="DateTime" Nullable="false" />
           <Property Name="DateActivated" Type="DateTime" Nullable="true" />
           <Property Name="DateLastLogin" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="LoginToken" Relationship="ShorthornContext.UserLoginToken" FromRole="User" ToRole="LoginToken" />

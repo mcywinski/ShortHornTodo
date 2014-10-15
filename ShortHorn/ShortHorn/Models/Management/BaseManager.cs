@@ -15,13 +15,13 @@ namespace ShortHorn.Models.Management
         /// <summary>
         /// The Entity Framework context.
         /// </summary>
-        protected ShorthornDb context;
+        protected shorthornDb context;
         
         /// <summary>
         /// Creates an instance of Manager.
         /// </summary>
         /// <param name="context">The Entity Framework context.</param>
-        public BaseManager(ShorthornDb context)
+        public BaseManager(shorthornDb context)
         {
             this.context = context;
         }

@@ -29,7 +29,7 @@ namespace ShortHorn.Models
         public bool Active { get; set; }
         public string ActivationToken { get; set; }
         public int PrivilegeLevel { get; set; }
-        public string DateRegistered { get; set; }
+        public System.DateTime DateRegistered { get; set; }
         public Nullable<System.DateTime> DateActivated { get; set; }
         public Nullable<System.DateTime> DateLastLogin { get; set; }
     
