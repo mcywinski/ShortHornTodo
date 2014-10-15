@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ShortHorn.Models;
+using ShortHorn.Services;
 
 namespace ShortHorn.Models.Management
 {
@@ -51,7 +52,7 @@ namespace ShortHorn.Models.Management
             }
             catch (Exception ex)
             {
-                //LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Create), ex);
+                LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Create), ex);
                 return false;
             }
             return true;
@@ -81,7 +82,7 @@ namespace ShortHorn.Models.Management
             }
             catch (Exception ex)
             {
-                //LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Update), ex);
+                LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Update), ex);
                 return false;
             }
             return true;
@@ -125,7 +126,7 @@ namespace ShortHorn.Models.Management
             }
             catch (Exception ex)
             {
-                //LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Delete), ex);
+                LogService.Logger.Fatal(LogService.GetCrudErrorLogMessage(typeof(User), LogService.CrudOperationType.Delete), ex);
                 return null;
 
             }
