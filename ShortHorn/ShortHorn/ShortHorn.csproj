@@ -208,6 +208,7 @@
     <Content Include="js\libs\angular.min.js" />
     <Content Include="js\libs\jquery-1.10.2.js" />
     <Content Include="js\libs\kickstart.js" />
+    <Content Include="Models\Persistence.edmx.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

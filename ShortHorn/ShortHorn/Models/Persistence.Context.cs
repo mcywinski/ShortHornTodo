@@ -27,7 +27,7 @@ namespace ShortHorn.Models
     
         public DbSet<User> Users { get; set; }
         public DbSet<LoginToken> LoginTokens { get; set; }
-        public DbSet<TodoList> TodoListSet { get; set; }
-        public DbSet<TodoItem> TodoItemSet { get; set; }
+        public DbSet<TodoList> TodoLists { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
     }
 }

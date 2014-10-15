@@ -4,10 +4,108 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ShorthornContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="ShorthornContextStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="ShorthornContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ShorthornContextStoreContainer">
+    <EntitySet Name="Users" EntityType="ShorthornContext.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LoginTokens" EntityType="ShorthornContext.Store.LoginTokens" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TodoLists" EntityType="ShorthornContext.Store.TodoLists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TodoItems" EntityType="ShorthornContext.Store.TodoItems" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserLoginToken" Association="ShorthornContext.Store.UserLoginToken">
+      <End Role="User" EntitySet="Users" />
+      <End Role="LoginToken" EntitySet="LoginTokens" />
+    </AssociationSet>
+    <AssociationSet Name="TodoListTodoItem" Association="ShorthornContext.Store.TodoListTodoItem">
+      <End Role="TodoList" EntitySet="TodoLists" />
+      <End Role="TodoItem" EntitySet="TodoItems" />
+    </AssociationSet>
+    <AssociationSet Name="UserTodoList" Association="ShorthornContext.Store.UserTodoList">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TodoList" EntitySet="TodoLists" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="ActivationToken" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PrivilegeLevel" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="DateRegistered" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateActivated" Type="datetime" Nullable="true" />
+    <Property Name="DateLastLogin" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="LoginTokens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Token" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TodoLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsFavourite" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TodoItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateFinish" Type="datetime" Nullable="false" />
+    <Property Name="IsFinished" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsFavourite" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="TodoListId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserLoginToken">
+    <End Role="User" Type="ShorthornContext.Store.Users" Multiplicity="1" />
+    <End Role="LoginToken" Type="ShorthornContext.Store.LoginTokens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoginToken">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TodoListTodoItem">
+    <End Role="TodoList" Type="ShorthornContext.Store.TodoLists" Multiplicity="1" />
+    <End Role="TodoItem" Type="ShorthornContext.Store.TodoItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TodoList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TodoItem">
+        <PropertyRef Name="TodoListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTodoList">
+    <End Role="User" Type="ShorthornContext.Store.Users" Multiplicity="1" />
+    <End Role="TodoList" Type="ShorthornContext.Store.TodoLists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TodoList">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShorthornContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -18,15 +116,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="LoginToken" EntitySet="LoginTokens" />
           </AssociationSet>
-          <EntitySet Name="TodoListSet" EntityType="ShorthornContext.TodoList" />
-          <EntitySet Name="TodoItemSet" EntityType="ShorthornContext.TodoItem" />
+          <EntitySet Name="TodoLists" EntityType="ShorthornContext.TodoList" />
+          <EntitySet Name="TodoItems" EntityType="ShorthornContext.TodoItem" />
           <AssociationSet Name="TodoListTodoItem" Association="ShorthornContext.TodoListTodoItem">
-            <End Role="TodoList" EntitySet="TodoListSet" />
-            <End Role="TodoItem" EntitySet="TodoItemSet" />
+            <End Role="TodoList" EntitySet="TodoLists" />
+            <End Role="TodoItem" EntitySet="TodoItems" />
           </AssociationSet>
           <AssociationSet Name="UserTodoList" Association="ShorthornContext.UserTodoList">
             <End Role="User" EntitySet="Users" />
-            <End Role="TodoList" EntitySet="TodoListSet" />
+            <End Role="TodoList" EntitySet="TodoLists" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
@@ -121,10 +219,60 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShorthornContextStoreContainer" CdmEntityContainer="shorthornDb" />
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShorthornContextStoreContainer" CdmEntityContainer="shorthornDb">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(ShorthornContext.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ActivationToken" ColumnName="ActivationToken" />
+          <ScalarProperty Name="PrivilegeLevel" ColumnName="PrivilegeLevel" />
+          <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+          <ScalarProperty Name="DateActivated" ColumnName="DateActivated" />
+          <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginTokens">
+      <EntityTypeMapping TypeName="IsTypeOf(ShorthornContext.LoginToken)">
+        <MappingFragment StoreEntitySet="LoginTokens">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TodoLists">
+      <EntityTypeMapping TypeName="IsTypeOf(ShorthornContext.TodoList)">
+        <MappingFragment StoreEntitySet="TodoLists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsFavourite" ColumnName="IsFavourite" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TodoItems">
+      <EntityTypeMapping TypeName="IsTypeOf(ShorthornContext.TodoItem)">
+        <MappingFragment StoreEntitySet="TodoItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+          <ScalarProperty Name="IsFinished" ColumnName="IsFinished" />
+          <ScalarProperty Name="IsFavourite" ColumnName="IsFavourite" />
+          <ScalarProperty Name="TodoListId" ColumnName="TodoListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -138,7 +286,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
