@@ -217,6 +217,7 @@
     <Content Include="css\style.css" />
     <Content Include="css\tiptip.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\background_main.jpg" />
     <Content Include="js\libs\angular-route.min.js" />
     <Content Include="js\libs\angular.min.js" />
     <Content Include="js\libs\jquery-1.10.2.js" />
@@ -277,6 +278,18 @@
       <Project>{a6312858-821a-455e-83be-09aa1bb4c80e}</Project>
       <Name>ShortHorn.DataTransferObjects</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\hyped.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\LeagueGothic-Regular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\lovelo.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\yanone.otf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
