@@ -133,6 +133,8 @@
     <Compile Include="Models\LoginToken.cs">
       <DependentUpon>Persistence.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Management\BaseManager.cs" />
+    <Compile Include="Models\Management\UserManager.cs" />
     <Compile Include="Models\Persistence.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

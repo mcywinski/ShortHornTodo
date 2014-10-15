@@ -13,9 +13,9 @@ namespace ShortHorn.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class shorthornDb : DbContext
+    public partial class ShorthornDb : DbContext
     {
-        public shorthornDb()
+        public ShorthornDb()
             : base("name=shorthornDb")
         {
         }
