@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShorthornContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ShorthornContextStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShorthornContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="shorthornDb" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Users" EntityType="ShorthornContext.User" />
+          <EntitySet Name="LoginTokens" EntityType="ShorthornContext.LoginToken" />
+          <AssociationSet Name="UserLoginToken" Association="ShorthornContext.UserLoginToken">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LoginToken" EntitySet="LoginTokens" />
+          </AssociationSet>
+          <EntitySet Name="TodoListSet" EntityType="ShorthornContext.TodoList" />
+          <EntitySet Name="TodoItemSet" EntityType="ShorthornContext.TodoItem" />
+          <AssociationSet Name="TodoListTodoItem" Association="ShorthornContext.TodoListTodoItem">
+            <End Role="TodoList" EntitySet="TodoListSet" />
+            <End Role="TodoItem" EntitySet="TodoItemSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserTodoList" Association="ShorthornContext.UserTodoList">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TodoList" EntitySet="TodoListSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Password" Type="String" Nullable="false" FixedLength="false" MaxLength="128" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="ActivationToken" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="PrivilegeLevel" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="DateRegistered" Type="String" Nullable="false" />
+          <Property Name="DateActivated" Type="DateTime" Nullable="true" />
+          <Property Name="DateLastLogin" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="LoginToken" Relationship="ShorthornContext.UserLoginToken" FromRole="User" ToRole="LoginToken" />
+          <NavigationProperty Name="TodoLists" Relationship="ShorthornContext.UserTodoList" FromRole="User" ToRole="TodoList" />
+        </EntityType>
+        <EntityType Name="LoginToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="ShorthornContext.UserLoginToken" FromRole="LoginToken" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserLoginToken">
+          <End Type="ShorthornContext.User" Role="User" Multiplicity="1" />
+          <End Type="ShorthornContext.LoginToken" Role="LoginToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TodoList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="IsFavourite" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="Items" Relationship="ShorthornContext.TodoListTodoItem" FromRole="TodoList" ToRole="TodoItem" />
+          <NavigationProperty Name="Owner" Relationship="ShorthornContext.UserTodoList" FromRole="TodoList" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TodoItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="DateFinish" Type="DateTime" Nullable="false" />
+          <Property Name="IsFinished" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="IsFavourite" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="ParentList" Relationship="ShorthornContext.TodoListTodoItem" FromRole="TodoItem" ToRole="TodoList" />
+          <Property Name="TodoListId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="TodoListTodoItem">
+          <End Type="ShorthornContext.TodoList" Role="TodoList" Multiplicity="1" />
+          <End Type="ShorthornContext.TodoItem" Role="TodoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TodoList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TodoItem">
+              <PropertyRef Name="TodoListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserTodoList">
+          <End Type="ShorthornContext.User" Role="User" Multiplicity="1" />
+          <End Type="ShorthornContext.TodoList" Role="TodoList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TodoList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShorthornContextStoreContainer" CdmEntityContainer="shorthornDb" />
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
