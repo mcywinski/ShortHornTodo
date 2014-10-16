@@ -218,6 +218,9 @@
     <Content Include="css\tiptip.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\background_main.jpg" />
+    <Content Include="js\app.js" />
+    <Content Include="js\controllers\homeController.js" />
+    <Content Include="js\helpers\tokenManager.js" />
     <Content Include="js\libs\angular-route.min.js" />
     <Content Include="js\libs\angular.min.js" />
     <Content Include="js\libs\jquery-1.10.2.js" />
@@ -235,9 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="js\controllers\" />
     <Folder Include="js\directives\" />
-    <Folder Include="js\helpers\" />
     <Folder Include="js\templates\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
@@ -294,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\yanone.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
