@@ -99,9 +99,13 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 #lay_top_menu a {
     color: #fff;
     text-decoration: none;
-    font-size: large;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: medium;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+#lay_top_menu a:hover {
+    color: #3d5c87;
 }
 
 #lay_top_menu_logo {
@@ -114,6 +118,6 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 }
 
 .dark_stroke {
-    height: 20px;
-    color: #000;
+    height: 10px;
+    background-color: #000;
 }

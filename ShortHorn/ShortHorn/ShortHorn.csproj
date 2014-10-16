@@ -235,6 +235,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="js\controllers\" />
+    <Folder Include="js\directives\" />
+    <Folder Include="js\helpers\" />
+    <Folder Include="js\templates\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
