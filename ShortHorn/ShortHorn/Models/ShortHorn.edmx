@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shorthornModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="shorthornModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shorthornModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="shorthornEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Users" EntityType="shorthornModel.User" />
+          <EntitySet Name="LoginTokens" EntityType="shorthornModel.LoginToken" />
+          <AssociationSet Name="UserLoginToken" Association="shorthornModel.UserLoginToken">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LoginToken" EntitySet="LoginTokens" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="DateRegistered" Type="DateTime" Nullable="true" />
+          <Property Name="DateActivated" Type="DateTime" Nullable="true" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LoginTokens" Relationship="shorthornModel.UserLoginToken" FromRole="User" ToRole="LoginToken" />
+        </EntityType>
+        <EntityType Name="LoginToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="shorthornModel.UserLoginToken" FromRole="LoginToken" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserLoginToken">
+          <End Type="shorthornModel.User" Role="User" Multiplicity="1" />
+          <End Type="shorthornModel.LoginToken" Role="LoginToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shorthornModelStoreContainer" CdmEntityContainer="shorthornEntities" />
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
