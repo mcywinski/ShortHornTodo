@@ -11,7 +11,7 @@ using ShortHorn.Services;
 using ShortHorn.DataTransferObjects;
 using System.Web;
 
-namespace Scrumbox.Controllers.API
+namespace ShortHorn.Controllers.API
 {
     public class UsersController : ApiController
     {

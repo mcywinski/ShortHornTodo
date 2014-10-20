@@ -9,7 +9,7 @@ using ShortHorn.Models.Management;
 using ShortHorn.Helpers;
 using ShortHorn.DataTransferObjects;
 
-namespace Scrumbox.Controllers.API
+namespace ShortHorn.Controllers.API
 {
     public class BaseApiController : ApiController
     {
