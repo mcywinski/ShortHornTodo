@@ -15,6 +15,8 @@ shorthornApp.config(function ($routeProvider) {
     }).when('/logout', {
         controller: 'usersController',
         templateUrl: '/Users/Login'
+    }).when('/lists/', {
+        templateUrl: '/ShortHorn/'
     });
 });
 

@@ -74,7 +74,7 @@ namespace ShortHorn.Controllers.API
         /// <param name="listDTO">
         /// The todo list DTO.
         /// </param>
-        public void Post([FromBody]TodoListDTO listDTO)
+        public void Post(TodoListDTO listDTO)
         {
             this.AuthenticateByDTO(listDTO);
             TodoListManager todoManager = new TodoListManager(this.dbContext);
@@ -87,7 +87,8 @@ namespace ShortHorn.Controllers.API
             TodoList list = new TodoList()
             {
                 Name = listDTO.Name,
-                Description = listDTO.Description
+                Description = listDTO.Description,
+                Owner = this.currentUser
             };
             if (!todoManager.CreateList(list))
             {
