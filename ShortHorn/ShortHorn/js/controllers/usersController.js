@@ -34,8 +34,10 @@
     };
 
     $scope.$on('$viewContentLoaded', function () {
-        DeleteLoginToken();
-        $location.path('/');
+        if ($location.absUrl().indexOf('logout') > -1) {
+            DeleteLoginToken();
+            $location.path('/');
+        }
     });
 
 });
