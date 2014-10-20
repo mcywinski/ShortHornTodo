@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/15/2014 23:57:20
+-- Date Created: 10/20/2014 20:34:46
 -- Generated from EDMX file: C:\dev\ShortHornTodo\ShortHorn\ShortHorn\Models\Persistence.edmx
 -- --------------------------------------------------
 

@@ -1,3 +1,20 @@
 ﻿@{
     Layout = null;
 }
+
+<div ng-controller="usersController">
+    <div class="col_6">
+        <p>
+            <input class="col_12" ng-model="loginData.login" placeholder="Your login" />
+        </p>
+        <p>
+            <input class="col_12" ng-model="loginData.password" placeholder="Password login" />
+        </p>
+        <p class="right">
+            <button ng-click="executeLogin()" class="small green"><i class="icon-user"></i> Login</button>
+        </p>
+    </div>
+    <div class="col_6">
+        <h3>Reklamy</h3>
+    </div>
+</div>

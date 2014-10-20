@@ -1,3 +1,30 @@
 ﻿@{
     Layout = null;
 }
+
+<div ng-controller="usersController">
+    <div class="col_6">
+        <h2>Sign up at ShortHorn!</h2>
+        <p>
+            <input type="text" ng-model="registerData.login" placeholder="Type your desired login" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="registerData.email" placeholder="Type your E-Mail address" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="registerData.emailConfirmed" placeholder="Repeat your E-Mail address" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="registerData.password" placeholder="Type your password" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="registerData.passwordConfirmed" placeholder="Repeat your password" class="col_12" />
+        </p>
+        <p class="right">
+            <button ng-click="executeRegister()" class="green"><i class="icon-user"></i> Register</button>
+        </p>
+    </div>
+    <div class="col_6">
+        <h3>Reklamy, które uprzyjemnią rejestrację.</h3>
+    </div>
+</div>

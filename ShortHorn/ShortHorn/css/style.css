@@ -69,10 +69,19 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 }
 
 #lay_top {
+    
+}
+
+.home-header {
     background-image: url('../Images/background_main.jpg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     height: 600px;
+}
+
+.standard-header {
+    height: 100px;
+    background-color: #000;
 }
 
 #lay_top_container {

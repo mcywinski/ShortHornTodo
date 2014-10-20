@@ -221,6 +221,7 @@
     <Content Include="Images\background_main.jpg" />
     <Content Include="js\app.js" />
     <Content Include="js\controllers\homeController.js" />
+    <Content Include="js\controllers\usersController.js" />
     <Content Include="js\helpers\tokenManager.js" />
     <Content Include="js\libs\angular-route.min.js" />
     <Content Include="js\libs\angular.min.js" />
