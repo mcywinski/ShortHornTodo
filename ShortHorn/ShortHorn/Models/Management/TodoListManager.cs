@@ -9,13 +9,13 @@ namespace ShortHorn.Models.Management
     /// <summary>
     /// Contains basic operations on Todo Lists.
     /// </summary>
-    public class ListManager : BaseManager
+    public class TodoListManager : BaseManager
     {
         /// <summary>
         /// The constructor
         /// </summary>
         /// <param name="context">The database context.</param>
-        public ListManager(shorthornDb context) : base (context) { }
+        public TodoListManager(shorthornDb context) : base (context) { }
 
         /// <summary>
         /// Gets a todo list of specified ID.

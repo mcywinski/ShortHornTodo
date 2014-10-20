@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\ListsController.cs" />
     <Compile Include="Controllers\API\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -143,6 +144,7 @@
       <DependentUpon>Persistence.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Management\BaseManager.cs" />
+    <Compile Include="Models\Management\TodoListManager.cs" />
     <Compile Include="Models\Management\UserManager.cs" />
     <Compile Include="Models\Persistence.Context.cs">
       <AutoGen>True</AutoGen>
