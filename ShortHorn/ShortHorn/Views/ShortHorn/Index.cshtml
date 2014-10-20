@@ -1,0 +1,15 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="todoListsController">
+    <div class="col_3">
+        <h5>Todo lists</h5>
+        <div ng-repeat="todoList in todoLists">
+            <a ng-click="toggleTodoList(todoList.id)">{{todoList.name}}</a>
+        </div>
+    </div>
+    <div class="col_9">
+        {{selectedTodoList.description}}
+    </div>
+</div>
