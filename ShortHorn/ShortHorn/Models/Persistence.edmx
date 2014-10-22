@@ -53,7 +53,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsFavourite" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
@@ -172,7 +172,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="128" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" />
           <Property Name="IsFavourite" Type="Boolean" Nullable="false" DefaultValue="false" />
           <NavigationProperty Name="Items" Relationship="ShorthornContext.TodoListTodoItem" FromRole="TodoList" ToRole="TodoItem" />
           <NavigationProperty Name="Owner" Relationship="ShorthornContext.UserTodoList" FromRole="TodoList" ToRole="User" />

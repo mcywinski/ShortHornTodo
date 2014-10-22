@@ -88,7 +88,8 @@ namespace ShortHorn.Controllers.API
             {
                 Name = listDTO.Name,
                 Description = listDTO.Description,
-                Owner = this.currentUser
+                Owner = this.currentUser,
+                IsFavourite = false
             };
             if (!todoManager.CreateList(list))
             {

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/20/2014 20:34:46
+-- Date Created: 10/22/2014 22:40:08
 -- Generated from EDMX file: C:\dev\ShortHornTodo\ShortHorn\ShortHorn\Models\Persistence.edmx
 -- --------------------------------------------------
 
@@ -76,7 +76,7 @@ GO
 CREATE TABLE [dbo].[TodoLists] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(128)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL,
     [IsFavourite] bit  NOT NULL,
     [UserId] int  NOT NULL
 );

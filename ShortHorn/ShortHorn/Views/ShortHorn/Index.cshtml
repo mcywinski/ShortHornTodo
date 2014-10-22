@@ -8,6 +8,10 @@
         <div ng-repeat="todoList in todoLists">
             <a ng-click="toggleTodoList(todoList.id)">{{todoList.name}}</a>
         </div>
+        <div>
+            <h6>Add new list</h6>
+            <input type="text" placeholder="Create a new list" ng-model="newListName" ng-keypress="executeCreateTodoListKeyPress($event)" /> <button class="small" ng-click="executeCreateTodoList()"><i class=" icon-plus-sign"></i></button>
+        </div>
     </div>
     <div class="col_9">
         {{selectedTodoList.description}}
