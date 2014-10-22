@@ -44,6 +44,7 @@
     <Compile Include="LoginTokenDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignupCredentialsDTO.cs" />
+    <Compile Include="TodoItemDTO.cs" />
     <Compile Include="TodoListDTO.cs" />
     <Compile Include="UserActivationParametersDTO.cs" />
     <Compile Include="UserDTO.cs" />
