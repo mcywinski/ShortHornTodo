@@ -145,6 +145,7 @@
       <DependentUpon>Persistence.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Management\BaseManager.cs" />
+    <Compile Include="Models\Management\TodoItemsManager.cs" />
     <Compile Include="Models\Management\TodoListManager.cs" />
     <Compile Include="Models\Management\UserManager.cs" />
     <Compile Include="Models\Persistence.Context.cs">
