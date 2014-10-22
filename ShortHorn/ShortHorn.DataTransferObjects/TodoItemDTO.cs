@@ -14,7 +14,7 @@ namespace ShortHorn.DataTransferObjects
         /// <summary>
         /// The ID of parent list.
         /// </summary>
-        public int TodoListId { get; set; }
+        public int ParentListId { get; set; }
 
         /// <summary>
         /// The name of Todo Item.

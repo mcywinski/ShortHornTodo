@@ -2,6 +2,7 @@
     $scope.todoLists = [];
     $scope.selectedTodoList = {};
     $scope.newListName = '';
+    $scope.newItemName = '';
 
     $scope.toggleTodoList = function (id) {
         for (var i = 0; i < $scope.todoLists.length; i++) {
@@ -31,6 +32,20 @@
         if (keyEvent.which == 13){
             $scope.executeCreateTodoList();
         }
+    };
+
+    $scope.executeCreateTodoItem = function () {
+        $http.post('/api/items', {
+            token: GetLoginToken(),
+            name: $scope.newItemName,
+            parentListId: $scope.selectedTodoList.id
+        }).success(function (data, status) {
+            alert('success');
+            //TODO handle success
+        }).error(function (data, status) {
+            alert('error');
+            //TODO handle error
+        });
     };
 
     $http.get('/api/lists?token=' + GetLoginToken()).success(function (data, status) {

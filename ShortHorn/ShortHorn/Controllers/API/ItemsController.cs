@@ -95,8 +95,7 @@ namespace ShortHorn.Controllers.API
             }
 
             TodoListManager listManager = new TodoListManager(this.dbContext);
-
-            TodoList parentList = listManager.GetListById(item.TodoListId);
+            TodoList parentList = listManager.GetListById(item.ParentListId);
 
             if (parentList == null)
             {
@@ -107,13 +106,16 @@ namespace ShortHorn.Controllers.API
                 ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.UnauthorizedException, ExceptionHelper.Messages.UnauthorizedOperationMessage, HttpStatusCode.Unauthorized);
             }
 
+            TodoItemsManager itemManager = new TodoItemsManager(this.dbContext);
             TodoItem dbItem = new TodoItem
             {
                 Details = item.Details,
-                Name = item.Name
+                Name = item.Name,
+                IsFavourite = false,
+                IsFinished = false,
+                ParentList = parentList
             };
-            parentList.Items.Add(dbItem);
-            if (!listManager.ModifyList(parentList))
+            if (!itemManager.CreateItem(dbItem))
             {
                 ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException);
             }

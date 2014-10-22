@@ -23,7 +23,7 @@ namespace ShortHorn.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Details { get; set; }
-        public System.DateTime DateFinish { get; set; }
+        public Nullable<System.DateTime> DateFinish { get; set; }
         public bool IsFinished { get; set; }
         public bool IsFavourite { get; set; }
         public int TodoListId { get; set; }

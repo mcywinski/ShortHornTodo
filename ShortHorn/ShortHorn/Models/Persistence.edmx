@@ -63,8 +63,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateFinish" Type="datetime" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DateFinish" Type="datetime" Nullable="true" />
     <Property Name="IsFinished" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="IsFavourite" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="TodoListId" Type="int" Nullable="false" />
@@ -184,8 +184,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="128" />
-          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="DateFinish" Type="DateTime" Nullable="false" />
+          <Property Name="Details" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="DateFinish" Type="DateTime" Nullable="true" />
           <Property Name="IsFinished" Type="Boolean" Nullable="false" DefaultValue="false" />
           <Property Name="IsFavourite" Type="Boolean" Nullable="false" DefaultValue="false" />
           <NavigationProperty Name="ParentList" Relationship="ShorthornContext.TodoListTodoItem" FromRole="TodoItem" ToRole="TodoList" />

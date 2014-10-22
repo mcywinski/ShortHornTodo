@@ -14,6 +14,9 @@
         </div>
     </div>
     <div class="col_9">
+        <div class="col_12">
+            <button class="small" ng-click="executeCreateTodoItem()"><i class="icon-plus-sign"></i></button> <input type="text" ng-model="newItemName" placeholder="Add a todo item" style="width: calc(100% - 40px);" />
+        </div>
         {{selectedTodoList.description}}
     </div>
 </div>
