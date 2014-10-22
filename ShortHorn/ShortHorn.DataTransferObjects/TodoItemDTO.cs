@@ -12,6 +12,11 @@ namespace ShortHorn.DataTransferObjects
     public class TodoItemDTO : BaseDTO
     {
         /// <summary>
+        /// The ID of parent list.
+        /// </summary>
+        public int TodoListId { get; set; }
+
+        /// <summary>
         /// The name of Todo Item.
         /// </summary>
         public string Name { get; set; }

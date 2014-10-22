@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\ItemsController.cs" />
     <Compile Include="Controllers\API\ListsController.cs" />
     <Compile Include="Controllers\API\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
