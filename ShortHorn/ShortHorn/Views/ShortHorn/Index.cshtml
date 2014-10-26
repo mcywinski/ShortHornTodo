@@ -13,10 +13,29 @@
             <input type="text" placeholder="Create a new list" ng-model="newListName" ng-keypress="executeCreateTodoListKeyPress($event)" /> <button class="small" ng-click="executeCreateTodoList()"><i class=" icon-plus-sign"></i></button>
         </div>
     </div>
-    <div class="col_9">
+    <div ng-class="{'col_6' : isItemDetailsPaneEnabled , 'col_9' : !isItemDetailsPaneEnabled}">
         <div class="col_12">
             <button class="small" ng-click="executeCreateTodoItem()"><i class="icon-plus-sign"></i></button> <input type="text" ng-model="newItemName" placeholder="Add a todo item" style="width: calc(100% - 40px);" />
         </div>
-        {{selectedTodoList.description}}
+        <div class="col_12">
+            <div ng-repeat="item in todoItems" style="border-radius: 3px; background-color: #393939; color: #fff; margin-top: 2px; margin-bottom: 2px; padding: 5px;">
+                <input type="checkbox" /> <a ng-click="executeToggleItemDetails(item.id)">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="col_3" ng-show="isItemDetailsPaneEnabled">
+        <p><button class="small" ng-click="executeHideItemDetails()"><i class=" icon-remove-sign"></i></button></p>
+        <p>
+            <a ng-click="executeToggleItemComplete()"><i ng-class="{'icon-check-empty' : !selectedTodoItem.isFinished, 'icon-check' : selectedTodoItem.isFinished}"></i> Incomplete<br /></a>
+            <a ng-click="executeToggleItemFavourite()"><i ng-class="{'icon-heart-empty' : !selectedTodoitem.isFavourite, 'icon-heart' : selectedTodoItem.isFavourite}"></i> Add to favourites</a>
+        </p>
+        <p>
+            <input type="text" class="col_12" placeholder="Item title" ng-model="selectedTodoItem.name" />
+        </p>
+        <p>
+            <textarea class="col_12" placeholder="Details" ng-model="selectedTodoItem.details">
+
+            </textarea>
+        </p>
     </div>
 </div>

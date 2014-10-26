@@ -1,16 +1,14 @@
 ﻿shorthornApp.controller('todoListsController', function ($scope, $http, $location) {
     $scope.todoLists = [];
+    $scope.todoItems = [];
     $scope.selectedTodoList = {};
+    $scope.selectedTodoItem = {};
     $scope.newListName = '';
     $scope.newItemName = '';
+    $scope.isItemDetailsPaneEnabled = false;
 
     $scope.toggleTodoList = function (id) {
-        for (var i = 0; i < $scope.todoLists.length; i++) {
-            if ($scope.todoLists[i].id == id) {
-                $scope.selectedTodoList = $scope.todoLists[i];
-                break;
-            }
-        }
+        $scope.fetchTodoItems(id);
     };
 
     $scope.executeCreateTodoList = function () {
@@ -46,6 +44,49 @@
             alert('error');
             //TODO handle error
         });
+    };
+
+    $scope.executeToggleItemDetails = function (itemId) {
+        if (!$scope.isItemDetailsPaneEnabled) {
+            for (var i = 0; i < $scope.todoItems.length; i++) {
+                if ($scope.todoItems[i].id == itemId) {
+                    $scope.selectedTodoItem = $scope.todoItems[i];
+                    $scope.isItemDetailsPaneEnabled = true;
+                    break;
+                }
+            }
+        }
+    };
+
+    $scope.executeHideItemDetails = function () {
+        $scope.isItemDetailsPaneEnabled = false;
+    }
+
+    $scope.executeToggleItemComplete = function () {
+        $scope.selectedTodoItem.isFinished = !$scope.selectedTodoItem.isFinished;
+        //Todo server communication
+    };
+
+    $scope.executeToggleItemFavourite = function () {
+        $scope.selectedTodoItem.isFavourite = !$scope.selectedTodoItem.isFavourite;
+        //Todo server communication
+    };
+
+    $scope.fetchTodoItems = function (listId) {
+        for (var i = 0; i < $scope.todoLists.length; i++) {
+            if ($scope.todoLists[i].id == listId) {
+                $scope.selectedTodoList = $scope.todoLists[i];
+                $http.post('/api/items/GetByList', {
+                    token: GetLoginToken(),
+                    id: $scope.selectedTodoList.id
+                }).success(function (data, status) {
+                    $scope.todoItems = data;
+                }).error(function (data, status) {
+                    alert('Error while fetching todo items: ' + status);
+                });
+                break;
+            }
+        }
     };
 
     $http.get('/api/lists?token=' + GetLoginToken()).success(function (data, status) {

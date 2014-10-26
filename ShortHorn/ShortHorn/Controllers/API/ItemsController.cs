@@ -48,18 +48,17 @@ namespace ShortHorn.Controllers.API
         }
 
         /// <summary>
-        /// Gets a collection of Todo Items belonging to a list of the given ID. Token must be provided in query string.
+        /// Gets a collection of Todo Items belonging to a list of the given ID.
         /// </summary>
-        /// <param name="listId">List ID.</param>
         /// <returns>Todo Items collection.</returns>
         [HttpPost]
-        public IEnumerable<TodoItemDTO> GetByList(int listId)
+        public IEnumerable<TodoItemDTO> GetByList(BaseDTO param)
         {
-            this.AuthenticateByQueryString();
+            this.AuthenticateByDTO(param);
             TodoListManager listManager = new TodoListManager(this.dbContext);
             TodoItemsManager itemsManager = new TodoItemsManager(this.dbContext);
 
-            TodoList list = listManager.GetListById(listId);
+            TodoList list = listManager.GetListById(param.Id);
             if (list == null)
             {
                 ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException, ExceptionHelper.Messages.NonExistingObjectMessage, HttpStatusCode.InternalServerError);
