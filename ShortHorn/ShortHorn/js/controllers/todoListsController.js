@@ -64,12 +64,12 @@
 
     $scope.executeToggleItemComplete = function () {
         $scope.selectedTodoItem.isFinished = !$scope.selectedTodoItem.isFinished;
-        //Todo server communication
+        $scope.updateTodoItem($scope.selectedTodoItem);
     };
 
     $scope.executeToggleItemFavourite = function () {
         $scope.selectedTodoItem.isFavourite = !$scope.selectedTodoItem.isFavourite;
-        //Todo server communication
+        $scope.updateTodoItem($scope.selectedTodoItem);
     };
 
     $scope.fetchTodoItems = function (listId) {
@@ -87,6 +87,15 @@
                 break;
             }
         }
+    };
+
+    $scope.updateTodoItem = function (item) {
+        item.token = GetLoginToken();
+        $http.put('/api/items', item).success(function (data, status) {
+
+        }).error(function (data, status) {
+            alert('Problem with updating the item. Try again');
+        });
     };
 
     $http.get('/api/lists?token=' + GetLoginToken()).success(function (data, status) {

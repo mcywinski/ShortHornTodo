@@ -22,6 +22,7 @@ namespace ShortHorn.Controllers.API
         /// </summary>
         /// <param name="itemId"></param>
         /// <returns></returns>
+        [HttpGet]
         public TodoItemDTO Get(int itemId)
         {
             this.AuthenticateByQueryString();
@@ -84,6 +85,7 @@ namespace ShortHorn.Controllers.API
             return todoItems;
         }
 
+        [HttpPost]
         public void Post(TodoItemDTO item)
         {
             this.AuthenticateByDTO(item);
@@ -115,6 +117,32 @@ namespace ShortHorn.Controllers.API
                 ParentList = parentList
             };
             if (!itemManager.CreateItem(dbItem))
+            {
+                ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException);
+            }
+        }
+
+        [HttpPut]
+        public void Put(TodoItemDTO item)
+        {
+            this.AuthenticateByDTO(item);
+            TodoItemsManager itemsManager = new TodoItemsManager(this.dbContext);
+            TodoItem dbItem = itemsManager.GetItemById(item.Id);
+            if (dbItem == null)
+            {
+                //TODO null exception
+            }
+            if (dbItem.ParentList.Owner != this.currentUser)
+            {
+                ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.UnauthorizedException, ExceptionHelper.Messages.UnauthorizedOperationMessage, HttpStatusCode.Unauthorized);
+            }
+
+            dbItem.Details = item.Details;
+            dbItem.IsFavourite = item.IsFavourite;
+            dbItem.IsFinished = item.IsFinished;
+            dbItem.Name = item.Name;
+
+            if (!itemsManager.ModifyItem(dbItem))
             {
                 ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException);
             }
