@@ -19,7 +19,7 @@
         </div>
         <div class="col_12">
             <div ng-repeat="item in todoItems" style="border-radius: 3px; background-color: #393939; color: #fff; margin-top: 2px; margin-bottom: 2px; padding: 5px;">
-                <input type="checkbox" /> <a ng-click="executeToggleItemDetails(item.id)">{{item.name}}</a>
+                <input type="checkbox" ng-model="item.isFinished" ng-change="updateTodoItem(item)" /> <a ng-click="executeToggleItemDetails(item.id)">{{item.name}}</a>
             </div>
         </div>
     </div>
