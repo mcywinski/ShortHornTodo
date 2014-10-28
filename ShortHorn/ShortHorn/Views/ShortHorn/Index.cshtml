@@ -24,16 +24,21 @@
         </div>
     </div>
     <div class="col_3" ng-show="isItemDetailsPaneEnabled">
-        <p><button class="small" ng-click="executeHideItemDetails()"><i class=" icon-remove-sign"></i></button></p>
+        <p><button class="small" ng-click="executeHideItemDetails()"><i class=" icon-remove-sign"></i> Close item details</button></p>
         <p>
             <a ng-click="executeToggleItemComplete()"><i ng-class="{'icon-check-empty' : !selectedTodoItem.isFinished, 'icon-check' : selectedTodoItem.isFinished}"></i> Incomplete<br /></a>
             <a ng-click="executeToggleItemFavourite()"><i ng-class="{'icon-heart-empty' : !selectedTodoitem.isFavourite, 'icon-heart' : selectedTodoItem.isFavourite}"></i> Add to favourites</a>
         </p>
         <p>
-            <input type="text" class="col_12" placeholder="Item title" ng-model="selectedTodoItem.name" />
+            <input type="text" class="col_12" placeholder="Item title" ng-model="selectedTodoItem.name" ng-keypress="executeItemEdit()" />
         </p>
         <p>
-            <textarea class="col_12" placeholder="Details" ng-model="selectedTodoItem.details"></textarea>
+            <textarea class="col_12" placeholder="Details" ng-model="selectedTodoItem.details" ng-keypress="executeItemEdit()"></textarea>
+        </p>
+        <p ng-show="isUpdatingTodoItem" class="center">
+            <img src="~/Images/preloader_item_pane.gif" alt="Updating" />
+            <br />
+            <em>Updating...</em>
         </p>
     </div>
 </div>

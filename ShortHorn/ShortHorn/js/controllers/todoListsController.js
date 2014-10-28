@@ -6,6 +6,8 @@
     $scope.newListName = '';
     $scope.newItemName = '';
     $scope.isItemDetailsPaneEnabled = false;
+    var moreEdits = false;
+    $scope.isUpdatingTodoItem = false;
 
     $scope.toggleTodoList = function (id) {
         $scope.fetchTodoItems(id);
@@ -47,20 +49,33 @@
     };
 
     $scope.executeToggleItemDetails = function (itemId) {
-        if (!$scope.isItemDetailsPaneEnabled) {
-            for (var i = 0; i < $scope.todoItems.length; i++) {
-                if ($scope.todoItems[i].id == itemId) {
-                    $scope.selectedTodoItem = $scope.todoItems[i];
-                    $scope.isItemDetailsPaneEnabled = true;
-                    break;
-                }
+        for (var i = 0; i < $scope.todoItems.length; i++) {
+            if ($scope.todoItems[i].id == itemId) {
+                $scope.selectedTodoItem = $scope.todoItems[i];
+                $scope.isItemDetailsPaneEnabled = true;
+                break;
             }
         }
     };
 
+    $scope.executeItemEdit = function () {
+        $scope.isUpdatingTodoItem = true;
+        moreEdits = true;
+        setTimeout($scope.executeItemEditsUpdate, 1000);
+        moreEdits = false;
+    };
+
+    $scope.executeItemEditsUpdate = function () {
+            if (!moreEdits) {
+            $scope.updateTodoItem($scope.selectedTodoItem);
+            $scope.isUpdatingTodoItem = false;
+        }
+        
+    };
+
     $scope.executeHideItemDetails = function () {
         $scope.isItemDetailsPaneEnabled = false;
-    }
+    };
 
     $scope.executeToggleItemComplete = function () {
         $scope.selectedTodoItem.isFinished = !$scope.selectedTodoItem.isFinished;

@@ -224,6 +224,7 @@
     <Content Include="css\tiptip.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\background_main.jpg" />
+    <Content Include="Images\preloader_item_pane.gif" />
     <Content Include="js\app.js" />
     <Content Include="js\controllers\homeController.js" />
     <Content Include="js\controllers\usersController.js" />
