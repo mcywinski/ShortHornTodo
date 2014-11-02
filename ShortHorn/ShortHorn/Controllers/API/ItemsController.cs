@@ -148,6 +148,26 @@ namespace ShortHorn.Controllers.API
             }
         }
 
-        //TODO Finish remaining methods
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            this.AuthenticateByQueryString();
+
+            TodoItemsManager itemsManager = new TodoItemsManager(this.dbContext);
+            TodoItem item = itemsManager.GetItemById(id);
+            if (item == null)
+            {
+                //TODO exception
+            }
+
+            if (item.ParentList.Owner != this.currentUser)
+            {
+                //TODO exception
+            }
+            if (!itemsManager.DeleteItem(item))
+            {
+                //TODO exception
+            }
+        }
     }
 }

@@ -35,6 +35,10 @@
         <p>
             <textarea class="col_12" placeholder="Details" ng-model="selectedTodoItem.details" ng-keypress="executeItemEdit()"></textarea>
         </p>
+        <p>
+            <button class="red small" ng-click="executeDeleteItem(selectedTodoItem.id)"><i class="icon-remove"></i> Delete this item</button>
+            <button class="red small" ng-click="test()"><i class="icon-remove"></i> Delete this item</button>
+        </p>
         <p ng-show="isUpdatingTodoItem" class="center">
             <img src="~/Images/preloader_item_pane.gif" alt="Updating" />
             <br />
