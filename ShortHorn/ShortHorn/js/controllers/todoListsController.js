@@ -1,4 +1,4 @@
-﻿shorthornApp.controller('todoListsController', function ($scope, $http, $location) {
+﻿shorthornApp.controller('todoListsController', function ($scope, $rootScope, $http, $location) {
     $scope.todoLists = [];
     $scope.todoItems = [];
     $scope.selectedTodoList = {};
@@ -8,9 +8,25 @@
     $scope.isItemDetailsPaneEnabled = false;
     var moreEdits = false;
     $scope.isUpdatingTodoItem = false;
+    $scope.isFavouriteListVisible = false;
+
+    $.backstretch('/images/list_background.jpg');
 
     $scope.toggleTodoList = function (id) {
+        $scope.isFavouriteListVisible = false;
         $scope.fetchTodoItems(id);
+    };
+
+    $scope.executeToggleFavouriteItemsList = function () {
+        $scope.isFavouriteListVisible = true;
+        $http.post('/api/items/GetFavourites', {
+            token: GetLoginToken()
+        }).success(function (data, status) {
+            $scope.selectedTodoList = null;
+            $scope.todoItems = data;
+        }).error(function (data, status) {
+            alert("SH*T ERROR");
+        });
     };
 
     $scope.executeCreateTodoList = function () {
@@ -34,18 +50,20 @@
         }
     };
 
-    $scope.executeCreateTodoItem = function () {
-        $http.post('/api/items', {
-            token: GetLoginToken(),
-            name: $scope.newItemName,
-            parentListId: $scope.selectedTodoList.id
-        }).success(function (data, status) {
-            alert('success');
-            //TODO handle success
-        }).error(function (data, status) {
-            alert('error');
-            //TODO handle error
-        });
+    $scope.executeCreateTodoItem = function (keyEvent) {
+        if (keyEvent.which == 13) {
+            $http.post('/api/items', {
+                token: GetLoginToken(),
+                name: $scope.newItemName,
+                parentListId: $scope.selectedTodoList.id
+            }).success(function (data, status) {
+                $scope.fetchTodoItems($scope.selectedTodoList.id);
+                $scope.newItemName = '';
+            }).error(function (data, status) {
+                alert('error');
+                //TODO handle error
+            });
+        }
     };
 
     $scope.executeToggleItemDetails = function (itemId) {
@@ -133,4 +151,6 @@
     }).error(function (data, status) {
         alert('Error while fetching todo lists. Refresh the page and try again.');
     });
+
+    $scope.executeToggleFavouriteItemsList();
 });

@@ -50,6 +50,15 @@ namespace ShortHorn.Models.Management
         }
 
         /// <summary>
+        /// Gets all favourite TOdo Items belonging to a user.
+        /// </summary>
+        /// <returns>Todo items collection.</returns>
+        public IEnumerable<TodoItem> GetFavourites(int userId)
+        {
+            return this.context.TodoItems.Where(i => i.ParentList.Owner.Id == userId && i.IsFavourite).ToList();
+        }
+
+        /// <summary>
         /// Saves a new Todo Item in database.
         /// </summary>
         /// <param name="item">The Item.</param>

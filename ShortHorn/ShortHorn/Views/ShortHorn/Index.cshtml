@@ -3,28 +3,33 @@
 }
 
 <div ng-controller="todoListsController">
-    <div class="col_3">
-        <h5>Todo lists</h5>
-        <div ng-repeat="todoList in todoLists">
-            <a ng-click="toggleTodoList(todoList.id)">{{todoList.name}}</a>
+    <div class="col_3 todoBox">
+        <h5 class="todoBoxSection"><i class="icon-bookmark-empty"></i> My to do lists</h5>
+        <div class="todoItem" ng-click="executeToggleFavouriteItemsList()" ng-class="{'selectedItem' : isFavouriteListVisible}">
+            <a><i class="icon-heart"></i> Favourite items</a>
         </div>
-        <div>
-            <h6>Add new list</h6>
+        <div ng-repeat="todoList in todoLists">
+            <div class="todoItem" ng-class="{'selectedItem' : todoList.id == selectedTodoList.id}" ng-click="toggleTodoList(todoList.id)">
+                <a><i class="icon-reorder"></i> {{todoList.name}}</a>
+            </div>
+        </div>
+        <div class="todoBoxSection">
+            <h6><i class="icon-plus"></i> Add new list</h6>
             <input type="text" placeholder="Create a new list" ng-model="newListName" ng-keypress="executeCreateTodoListKeyPress($event)" /> <button class="small" ng-click="executeCreateTodoList()"><i class=" icon-plus-sign"></i></button>
         </div>
     </div>
     <div ng-class="{'col_6' : isItemDetailsPaneEnabled , 'col_9' : !isItemDetailsPaneEnabled}">
-        <div class="col_12">
-            <button class="small" ng-click="executeCreateTodoItem()"><i class="icon-plus-sign"></i></button> <input type="text" ng-model="newItemName" placeholder="Add a todo item" style="width: calc(100% - 40px);" />
+        <div class="col_12" ng-show="!isFavouriteListVisible">
+            <input type="text" ng-model="newItemName" ng-keypress="executeCreateTodoItem($event)" placeholder="Add a todo item" class="col_12" />
         </div>
         <div class="col_12">
-            <div ng-repeat="item in todoItems" style="border-radius: 3px; background-color: #393939; color: #fff; margin-top: 2px; margin-bottom: 2px; padding: 5px;">
+            <div ng-repeat="item in todoItems" class="todoListItem">
                 <input type="checkbox" ng-model="item.isFinished" ng-change="updateTodoItem(item)" /> <a ng-click="executeToggleItemDetails(item.id)">{{item.name}}</a>
             </div>
         </div>
     </div>
-    <div class="col_3" ng-show="isItemDetailsPaneEnabled">
-        <p><button class="small" ng-click="executeHideItemDetails()"><i class=" icon-remove-sign"></i> Close item details</button></p>
+    <div class="col_3 todoBox todoBoxSection" ng-show="isItemDetailsPaneEnabled">
+        <p class="right"><button class="small" ng-click="executeHideItemDetails()"><i class=" icon-remove-sign"></i> Close</button></p>
         <p>
             <a ng-click="executeToggleItemComplete()"><i ng-class="{'icon-check-empty' : !selectedTodoItem.isFinished, 'icon-check' : selectedTodoItem.isFinished}"></i> Incomplete<br /></a>
             <a ng-click="executeToggleItemFavourite()"><i ng-class="{'icon-heart-empty' : !selectedTodoitem.isFavourite, 'icon-heart' : selectedTodoItem.isFavourite}"></i> Add to favourites</a>
@@ -37,7 +42,6 @@
         </p>
         <p>
             <button class="red small" ng-click="executeDeleteItem(selectedTodoItem.id)"><i class="icon-remove"></i> Delete this item</button>
-            <button class="red small" ng-click="test()"><i class="icon-remove"></i> Delete this item</button>
         </p>
         <p ng-show="isUpdatingTodoItem" class="center">
             <img src="~/Images/preloader_item_pane.gif" alt="Updating" />

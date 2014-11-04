@@ -224,11 +224,14 @@
     <Content Include="css\tiptip.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\background_main.jpg" />
+    <Content Include="Images\list_background.jpg" />
     <Content Include="Images\preloader_item_pane.gif" />
+    <Content Include="Images\wooden_background.jpg" />
     <Content Include="js\app.js" />
     <Content Include="js\controllers\homeController.js" />
     <Content Include="js\controllers\usersController.js" />
     <Content Include="js\helpers\tokenManager.js" />
+    <Content Include="js\libs\jquery.backstretch.min.js" />
     <Content Include="js\libs\angular-route.min.js" />
     <Content Include="js\libs\angular.min.js" />
     <Content Include="js\libs\jquery-1.10.2.js" />

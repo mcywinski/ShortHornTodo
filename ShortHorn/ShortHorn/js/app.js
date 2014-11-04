@@ -23,6 +23,7 @@ shorthornApp.config(function ($routeProvider) {
 /*** App Event handling ***/
 shorthornApp.run(function ($rootScope) {
     $rootScope.isLoggedIn = false;
+    $rootScope.isTodoListsView = false;
 
     $rootScope.$on('$routeChangeSuccess', function (ev, data) {
         if (GetLoginToken() != null) {

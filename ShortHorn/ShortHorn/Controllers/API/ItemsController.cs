@@ -86,6 +86,28 @@ namespace ShortHorn.Controllers.API
         }
 
         [HttpPost]
+        public IEnumerable<TodoItemDTO> GetFavourites(BaseDTO param)
+        {
+            this.AuthenticateByDTO(param);
+            TodoItemsManager itemsManager = new TodoItemsManager(this.dbContext);
+
+            IEnumerable<TodoItem> rawItems = itemsManager.GetFavourites(this.currentUser.Id);
+            List<TodoItemDTO> items = new List<TodoItemDTO>();
+            foreach (TodoItem rawItem in rawItems)
+            {
+                items.Add(new TodoItemDTO()
+                {
+                    Details = rawItem.Details,
+                    Id = rawItem.Id,
+                    IsFavourite = rawItem.IsFavourite,
+                    IsFinished = rawItem.IsFinished,
+                    Name = rawItem.Name
+                });
+            }
+            return items;
+        }
+
+        [HttpPost]
         public void Post(TodoItemDTO item)
         {
             this.AuthenticateByDTO(item);
