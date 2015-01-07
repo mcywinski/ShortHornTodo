@@ -44,7 +44,8 @@ namespace ShortHorn.Controllers.API
                 Id = item.Id,
                 IsFavourite = item.IsFavourite,
                 IsFinished = item.IsFinished,
-                Name = item.Name
+                Name = item.Name,
+                DateFinish = item.DateFinish
             };
         }
 
@@ -78,7 +79,8 @@ namespace ShortHorn.Controllers.API
                     Id = rawTodoitem.Id,
                     IsFavourite = rawTodoitem.IsFavourite,
                     IsFinished = rawTodoitem.IsFinished,
-                    Name = rawTodoitem.Name    
+                    Name = rawTodoitem.Name,
+                    DateFinish = rawTodoitem.DateFinish
                 });
             }
 

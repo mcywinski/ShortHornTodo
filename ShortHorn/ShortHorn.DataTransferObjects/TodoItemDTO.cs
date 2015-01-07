@@ -24,7 +24,7 @@ namespace ShortHorn.DataTransferObjects
         /// <summary>
         /// Date finishing of Todo Item.
         /// </summary>
-        public DateTime DateFinish { get; set; }
+        public DateTime? DateFinish { get; set; }
 
         /// <summary>
         /// Detailed information about Todo item.
