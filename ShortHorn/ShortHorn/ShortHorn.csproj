@@ -183,6 +183,7 @@
     <Content Include="css\fonts\fontawesome\css\font-awesome.css" />
     <Content Include="css\fonts\fontawesome\css\font-awesome.min.css" />
     <Content Include="css\fonts\fontawesome\font\fontawesome-webfont.svg" />
+    <Content Include="css\fonts\weathericons-regular-webfont.svg" />
     <Content Include="css\img\breadcrumbs-bg.gif" />
     <Content Include="css\img\bx_loader.gif" />
     <Content Include="css\img\controls.png" />
@@ -228,6 +229,7 @@
     <Content Include="css\prettify.css" />
     <Content Include="css\style.css" />
     <Content Include="css\tiptip.css" />
+    <Content Include="css\weather-icons.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\background_main.jpg" />
     <Content Include="Images\list_background.jpg" />
@@ -246,6 +248,10 @@
     <Content Include="Images\ui-icons_ef8c08_256x240.png" />
     <Content Include="Images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Images\WeatherIcons\cloud.png" />
+    <Content Include="Images\WeatherIcons\rain.png" />
+    <Content Include="Images\WeatherIcons\snow.png" />
+    <Content Include="Images\WeatherIcons\sun.png" />
     <Content Include="Images\wooden_background.jpg" />
     <Content Include="js\app.js" />
     <Content Include="js\controllers\homeController.js" />
@@ -343,6 +349,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ShortHorn\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="css\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="css\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="css\fonts\WeatherIcons-Regular.otf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

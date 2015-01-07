@@ -72,6 +72,14 @@
                 $scope.selectedTodoItem = $scope.todoItems[i];
                 $scope.selectedTodoItem.dateFinish = moment($scope.selectedTodoItem.dateFinish).format('MM/DD/YYYY');
                 $scope.isItemDetailsPaneEnabled = true;
+
+                //Fetching weather details
+                $http.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Warsaw,pl&cnt=16&mode=json').success(function (postback) {
+                    $scope.weather = postback.list[15];
+            
+                }).error(function() {
+                    alert("Error while fetching the weather!");
+                });
                 break;
             }
         }
