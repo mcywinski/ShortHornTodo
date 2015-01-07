@@ -163,6 +163,7 @@ namespace ShortHorn.Controllers.API
             dbItem.IsFavourite = item.IsFavourite;
             dbItem.IsFinished = item.IsFinished;
             dbItem.Name = item.Name;
+            dbItem.DateFinish = item.DateFinish;
 
             if (!itemsManager.ModifyItem(dbItem))
             {
