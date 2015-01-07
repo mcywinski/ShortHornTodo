@@ -70,6 +70,7 @@
         for (var i = 0; i < $scope.todoItems.length; i++) {
             if ($scope.todoItems[i].id == itemId) {
                 $scope.selectedTodoItem = $scope.todoItems[i];
+                $scope.selectedTodoItem.dateFinish = moment($scope.selectedTodoItem.dateFinish).format('MM/DD/YYYY');
                 $scope.isItemDetailsPaneEnabled = true;
                 break;
             }
