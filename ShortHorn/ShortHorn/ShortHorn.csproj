@@ -251,6 +251,7 @@
     <Content Include="js\controllers\homeController.js" />
     <Content Include="js\controllers\usersController.js" />
     <Content Include="js\helpers\itemDatePickerHelper.js" />
+    <Content Include="js\libs\moment.js" />
     <Content Include="js\helpers\tokenManager.js" />
     <Content Include="js\libs\jquery-ui.js" />
     <Content Include="js\libs\jquery-ui.min.js" />
