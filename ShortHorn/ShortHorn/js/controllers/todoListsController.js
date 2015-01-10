@@ -73,13 +73,7 @@
                 $scope.selectedTodoItem.dateFinish = moment($scope.selectedTodoItem.dateFinish).format('MM/DD/YYYY');
                 $scope.isItemDetailsPaneEnabled = true;
 
-                //Fetching weather details
-                $http.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Warsaw,pl&cnt=16&mode=json').success(function (postback) {
-                    $scope.weather = postback.list[15];
-            
-                }).error(function() {
-                    alert("Error while fetching the weather!");
-                });
+                $scope.fetchWeatherDetails();
                 break;
             }
         }
@@ -94,7 +88,8 @@
 
     $scope.executeItemEditsUpdate = function () {
             if (!moreEdits) {
-            $scope.updateTodoItem($scope.selectedTodoItem);
+                $scope.updateTodoItem($scope.selectedTodoItem);
+                $scope.fetchWeatherDetails();
             $scope.isUpdatingTodoItem = false;
         }
         
@@ -154,6 +149,24 @@
             alert('Problem with updating the item. Try again');
         });
     };
+    
+    $scope.fetchWeatherDetails = function () {
+
+        $http.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Warsaw,pl&cnt=14&mode=json').success(function (postback) {
+            $scope.dateNow = moment(moment()).format('MM/DD/YYYY');
+            $scope.daysBetweenDates = moment($scope.selectedTodoItem.dateFinish).diff($scope.dateNow, 'days');
+
+            if ($scope.daysBetweenDates >= 0 && $scope.daysBetweenDates <= 13) {
+                $scope.weather = postback.list[$scope.daysBetweenDates];
+                $scope.weather.temp.day = ($scope.weather.temp.day - 273.15).toFixed(1);
+            }
+            else {
+                $scope.weather = null;
+            }
+        }).error(function () {
+            alert("Error while fetching the weather!");
+        });
+    }
 
     $http.get('/api/lists?token=' + GetLoginToken()).success(function (data, status) {
         $scope.todoLists = data;

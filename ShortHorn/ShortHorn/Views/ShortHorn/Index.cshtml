@@ -44,16 +44,18 @@
         <p>
             <button class="red small" ng-click="executeDeleteItem(selectedTodoItem.id)"><i class="icon-remove"></i> Delete this item</button>
         </p>
-        <p>
+        <p ng-show="weather != null">
             <h3>Weather</h3>
-            Day temp:: {{weather.temp.day - 273.15}}
-          
+            Temperature: {{weather.temp.day}}°C
+            
+            <img src="~/Images/WeatherIcons/rain.png" ng-show="weather.weather[0].main == 'Rain'" />
+
+            <img src="~/Images/WeatherIcons/snow.png" ng-show="weather.weather[0].main == 'Snow'" />
+
         </p>
-        <p ng-show="weather.weather[0].main == 'Rain'" class="center">
-            <img src="~/Images/WeatherIcons/rain.png" />
-        </p>
-        <p ng-show="weather.weather[0].main == 'Snow'">
-            <img src="~/Images/WeatherIcons/snow.png" />
+        
+        <p ng-show="weather == null">
+            <em>Sorry, we don't know weather for this day :(</em>
         </p>
         <p ng-show="isUpdatingTodoItem" class="center">
             <img src="~/Images/preloader_item_pane.gif" alt="Updating" />
