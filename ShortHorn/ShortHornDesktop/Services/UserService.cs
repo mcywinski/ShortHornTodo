@@ -29,9 +29,7 @@ namespace ShortHorn.Desktop.Services
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.apiBaseUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.Timeout = new TimeSpan(0, 0, 5);
+                this.resetClient(client);
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/users/login", new LoginCredentialsDTO()
                 {

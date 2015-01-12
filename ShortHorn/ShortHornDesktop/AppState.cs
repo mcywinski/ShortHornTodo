@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShortHornDesktop
+namespace ShortHorn.Desktop
 {
     public class AppState
     {
+
         #region public fields
 
-        public string ApiLoginToken { get; set; }
+        public static string ApiLoginToken { get; set; }
 
         #endregion
 

@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShortHorn.Desktop.Services;
 
-namespace ShortHornDesktop
+namespace ShortHorn.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +24,20 @@ namespace ShortHornDesktop
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            UserService userService = new UserService(ConfigurationManager.GetApiBaseAddress());
+            string token = await userService.Login(txtBoxLogin.Text, txtBoxPassword.Password);
+            if (string.IsNullOrEmpty(token))
+            {
+                MessageBox.Show("Login or password is incorrect!");
+            }
+            else
+            {
+                AppState.ApiLoginToken = token;
+            }
         }
     }
 }

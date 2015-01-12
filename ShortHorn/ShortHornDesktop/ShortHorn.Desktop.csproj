@@ -7,7 +7,7 @@
     <ProjectGuid>{8A80545D-0888-45A5-96B4-EFD60A527546}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShortHornDesktop</RootNamespace>
+    <RootNamespace>ShortHorn.Desktop</RootNamespace>
     <AssemblyName>ShortHornDesktop</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Page Include="MainWindow.xaml">
