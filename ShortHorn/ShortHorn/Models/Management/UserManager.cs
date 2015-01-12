@@ -39,6 +39,24 @@ namespace ShortHorn.Models.Management
         }
 
         /// <summary>
+        /// Retrieves a specific user based on token criteria.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns>The user.</returns>
+        public User GetUserByToken(string token)
+        {
+            LoginToken t = context.LoginTokens.Where(lt => lt.Token == token).SingleOrDefault();
+            if (t == null)
+            {
+                return null;
+            }
+            else
+            {
+                return context.Users.SingleOrDefault(u => u.Id == t.UserId);
+            }
+        }
+
+        /// <summary>
         /// Saves an user in database.
         /// </summary>
         /// <param name="user">THe user to be created.</param>

@@ -37,6 +37,8 @@
     <Property Name="DateRegistered" Type="datetime" Nullable="false" />
     <Property Name="DateActivated" Type="datetime" Nullable="true" />
     <Property Name="DateLastLogin" Type="datetime" Nullable="true" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" DefaultValue="Warsaw" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="true" DefaultValue="PL" />
   </EntityType>
   <EntityType Name="LoginTokens">
     <Key>
@@ -143,6 +145,8 @@
           <Property Name="DateLastLogin" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="LoginToken" Relationship="ShorthornContext.UserLoginToken" FromRole="User" ToRole="LoginToken" />
           <NavigationProperty Name="TodoLists" Relationship="ShorthornContext.UserTodoList" FromRole="User" ToRole="TodoList" />
+          <Property Name="City" Type="String" Nullable="true" DefaultValue="Warsaw" />
+          <Property Name="Country" Type="String" Nullable="true" DefaultValue="PL" />
         </EntityType>
         <EntityType Name="LoginToken">
           <Key>
@@ -234,6 +238,8 @@
           <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
           <ScalarProperty Name="DateActivated" ColumnName="DateActivated" />
           <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,6 +1,7 @@
 ﻿shorthornApp.controller('usersController', function ($scope, $http, $location) {
     $scope.loginData = {};
     $scope.registerData = {};
+    $scope.changeData = {};
 
     $scope.executeLogin = function () {
         $http.post('/api/users/login', {
@@ -39,5 +40,19 @@
             $location.path('/');
         }
     });
+
+    $scope.executeUserPropertiesSave = function (item) {
+        $http.put('/api/users', {
+            token: GetLoginToken(),
+            login: $scope.changeData.login,
+            email: $scope.changeData.email,
+            city: $scope.changeData.city,
+            country: $scope.changeData.country
+        }).success(function (data, status) {
+            $scope.successUserPropertiesSave = false;
+        }).error(function (data, status) {
+            $scope.errorUserPropertiesSave = true;
+        });
+    };
 
 });

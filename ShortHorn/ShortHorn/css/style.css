@@ -27,13 +27,22 @@
     src: url('../Fonts/yanone.otf');
 }
 
+@font-face {
+    font-family: Bevan;
+    src: url('../Fonts/Bevan.ttf');
+}
+
 /*---------------------------------
 	OVERRIDES
 -----------------------------------*/
 h1,h2,h3,h4,h5,h6{
-font-family: Tahoma, arial, verdana, sans-serif;
+font-family: Yanone, Tahoma, arial, verdana, sans-serif;
 font-weight:normal;
 }
+
+/*.grid h1,h2,h3,h4,h5,h6{
+    color: #000!important;
+}*/
 
 thead th,
 tbody th{
@@ -107,8 +116,8 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
     background-color: #0c0c0c;
 }
 
-#lay_top_menu h1, h2 {
-    font-family: Hyped, Impact;
+#lay_top_menu h2 {
+    font-family: Yanone;
     color: #fff;
 }
 
@@ -143,6 +152,10 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 1px 4px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.todoBox-dialog {
+    padding: 10px;
 }
 
 .todoBoxSection {

@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="usersController" class="todoBox" style="padding:10px;">
+    <div> 
+        <h2>Account properties</h2>
+        <div ng-show="errorUserPropertiesSave" class="notice error">
+            <i class="icon-remove-sign icon-large"></i> Error while saving user properties
+            <a href="#close" class="icon-remove"></a>
+        </div>
+        <div ng-show="errorUserPropertiesSave == false" class="notice success">
+            <i class="icon-ok icon-large"></i> All changes saved
+            <a href="#close" class="icon-remove"></a>
+        </div>
+        <p>
+            <input type="text" ng-model="changeData.login" placeholder="Type your desired login" class="col_12">{{}}
+        </p>
+        <p>
+            <input type="text" ng-model="changeData.email" placeholder="Type your E-Mail address" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="changeData.city" placeholder="Type your city (for weather only)" class="col_12" />
+        </p>
+        <p>
+            <input type="text" ng-model="changeData.country" placeholder="Type your country (for weather only)" class="col_12" />
+        </p>
+
+        <p class="right">
+            <button ng-click="executeUserPropertiesSave()" class="green"><i class="icon-user"></i> Save changes</button>
+        </p>
+    </div>
+</div>
