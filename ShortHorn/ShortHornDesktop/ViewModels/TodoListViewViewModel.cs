@@ -15,9 +15,11 @@ namespace ShortHorn.Desktop.ViewModels
         public TodoListViewViewModel()
         {
             this.TodoLists = new ObservableCollection<TodoListDTO>();
+            this.TodoItems = new ObservableCollection<TodoItemDTO>();
         }
 
         public ObservableCollection<TodoListDTO> TodoLists { get; set; }
+        public ObservableCollection<TodoItemDTO> TodoItems { get; set; }
 
         private string location;
         public string Location
@@ -25,6 +27,8 @@ namespace ShortHorn.Desktop.ViewModels
             get { return location; }
             set { location = value; onPropertyChanged(this, "Location"); }
         }
+
+        public int CurrentListId { get; set; }
 
         public async Task<bool> GetTodoLists()
         {
@@ -36,6 +40,24 @@ namespace ShortHorn.Desktop.ViewModels
                 this.TodoLists.Add(list);
             }
             return true;
+        }
+
+        public async Task GetTodoItems()
+        {
+            TodoItemsService itemsService = new TodoItemsService(ConfigurationManager.GetApiBaseAddress(), AppState.ApiLoginToken);
+            List<TodoItemDTO> items = await itemsService.GetAllItems(CurrentListId);
+            this.TodoItems.Clear();
+            foreach (var item in items)
+            {
+                this.TodoItems.Add(item);
+            }
+        }
+
+        public async void CreateTodoItem(string title)
+        {
+            TodoItemsService itemsService = new TodoItemsService(ConfigurationManager.GetApiBaseAddress(), AppState.ApiLoginToken);
+            bool result = await itemsService.CreateItem(this.CurrentListId, title);
+            await this.GetTodoItems();
         }
     }
 }
