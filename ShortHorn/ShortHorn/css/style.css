@@ -145,6 +145,10 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
     box-shadow: 1px 4px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
+.todoBox-dialog {
+    padding: 10px;
+}
+
 .todoBoxSection {
     padding: 5px;
 }

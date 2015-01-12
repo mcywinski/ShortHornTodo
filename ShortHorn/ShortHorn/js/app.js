@@ -16,7 +16,10 @@ shorthornApp.config(function ($routeProvider) {
         controller: 'usersController',
         templateUrl: '/Users/Login'
     }).when('/lists/', {
-        templateUrl: '/ShortHorn/'
+        templateUrl: '/ShortHorn/',
+    }).when('/profile', {
+        controller: 'usersController',
+        templateUrl: '/Users/Profile'
     });
 });
 

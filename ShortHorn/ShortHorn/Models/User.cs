@@ -18,6 +18,8 @@ namespace ShortHorn.Models
         {
             this.Active = false;
             this.PrivilegeLevel = 0;
+            this.City = "Warsaw";
+            this.Country = "PL";
             this.LoginToken = new HashSet<LoginToken>();
             this.TodoLists = new HashSet<TodoList>();
         }
@@ -32,6 +34,8 @@ namespace ShortHorn.Models
         public System.DateTime DateRegistered { get; set; }
         public Nullable<System.DateTime> DateActivated { get; set; }
         public Nullable<System.DateTime> DateLastLogin { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
     
         public virtual ICollection<LoginToken> LoginToken { get; set; }
         public virtual ICollection<TodoList> TodoLists { get; set; }

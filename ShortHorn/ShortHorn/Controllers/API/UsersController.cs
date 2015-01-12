@@ -13,7 +13,7 @@ using System.Web;
 
 namespace ShortHorn.Controllers.API
 {
-    public class UsersController : ApiController
+    public class UsersController : BaseApiController
     {
         /// <summary>
         /// Creates new user. Returns HTTP 200 status if registration is successful. Otherwise HTTP 500 Status is returned.
@@ -185,6 +185,32 @@ namespace ShortHorn.Controllers.API
             loginToken.Token = dbToken.Token;
 
             return loginToken;
+        }
+
+        [HttpPut]
+        public void Put(UserDTO user)
+        {
+            this.AuthenticateByDTO(user);
+            UserManager userManager = new UserManager(this.dbContext);
+            User modifiedUser = userManager.GetUserByToken(user.Token);
+            if (modifiedUser == null)
+            {
+                //TODO null exception
+            }
+            if (modifiedUser != this.currentUser)
+            {
+                ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.UnauthorizedException, ExceptionHelper.Messages.UnauthorizedOperationMessage, HttpStatusCode.Unauthorized);
+            }
+
+            modifiedUser.Login = user.Login;
+            modifiedUser.Email = user.Email;
+            modifiedUser.City = user.City;
+            modifiedUser.Country = user.Country;
+
+            if (!userManager.SaveUser(modifiedUser))
+            {
+                ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException);
+            }
         }
     }
 }
