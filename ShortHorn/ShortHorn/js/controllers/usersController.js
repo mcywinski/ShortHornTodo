@@ -41,7 +41,7 @@
         }
     });
 
-    $scope.executeUserPropertiesSave = function (item) {
+    $scope.executeUserPropertiesSave = function () {
         $http.put('/api/users', {
             token: GetLoginToken(),
             login: $scope.changeData.login,
@@ -49,9 +49,9 @@
             city: $scope.changeData.city,
             country: $scope.changeData.country
         }).success(function (data, status) {
-            $scope.successUserPropertiesSave = false;
+            $scope.statusUserPropertiesSave = 1; //1 - success, 2 - error
         }).error(function (data, status) {
-            $scope.errorUserPropertiesSave = true;
+            $scope.statusUserPropertiesSave = 2;
         });
     };
 

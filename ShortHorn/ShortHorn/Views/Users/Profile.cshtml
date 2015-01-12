@@ -5,13 +5,11 @@
 <div ng-controller="usersController" class="todoBox" style="padding:10px;">
     <div> 
         <h2>Account properties</h2>
-        <div ng-show="errorUserPropertiesSave" class="notice error">
-            <i class="icon-remove-sign icon-large"></i> Error while saving user properties
-            <a href="#close" class="icon-remove"></a>
+        <div ng-show="statusUserPropertiesSave == 2" class="notice error">
+            <i class="icon-remove-sign icon-large"></i> Error while saving user properties!
         </div>
-        <div ng-show="errorUserPropertiesSave == false" class="notice success">
+        <div ng-show="statusUserPropertiesSave == 1" class="notice success">
             <i class="icon-ok icon-large"></i> All changes saved
-            <a href="#close" class="icon-remove"></a>
         </div>
         <p>
             <input type="text" ng-model="changeData.login" placeholder="Type your desired login" class="col_12">{{}}
