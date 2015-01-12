@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShortHorn.Desktop.Services;
+using ShortHorn.Desktop.Windows;
 
 namespace ShortHorn.Desktop
 {
@@ -21,6 +22,8 @@ namespace ShortHorn.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        TodoListViewWindow windowTodos;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +40,9 @@ namespace ShortHorn.Desktop
             else
             {
                 AppState.ApiLoginToken = token;
+                this.Visibility = Visibility.Collapsed;
+                windowTodos = new TodoListViewWindow();
+                windowTodos.Show();
             }
         }
     }
