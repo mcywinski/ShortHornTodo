@@ -22,6 +22,8 @@ namespace ShortHorn.Desktop.Windows
     {
         private TodoListViewViewModel todoListViewViewModel;
 
+        private CreateTodoListWindow createTodoListWindow = null;
+
         public TodoListViewWindow()
         {
             InitializeComponent();
@@ -32,6 +34,13 @@ namespace ShortHorn.Desktop.Windows
         private async void ListBox_Loaded(object sender, RoutedEventArgs e)
         {
             await this.todoListViewViewModel.GetTodoLists();
+        }
+
+        private void btnAddList_Click(object sender, RoutedEventArgs e)
+        {
+            createTodoListWindow = new CreateTodoListWindow();
+            createTodoListWindow.ShowDialog();
+            createTodoListWindow = null;
         }
     }
 }

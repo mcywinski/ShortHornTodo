@@ -4,7 +4,9 @@
         xmlns:vm="clr-namespace:ShortHorn.Desktop.ViewModels"
         Title="{Binding Location}" Height="418" Width="623">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="367" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding TodoLists}" DisplayMemberPath="Name" Loaded="ListBox_Loaded"/>
+        <ListBox HorizontalAlignment="Left" Margin="10,10,0,35" Width="200" ItemsSource="{Binding TodoLists}" DisplayMemberPath="Name" Loaded="ListBox_Loaded"/>
+        <Button x:Name="btnAddList" Content="+" HorizontalAlignment="Left" Margin="10,357,0,0" VerticalAlignment="Top" Width="20
+                " Click="btnAddList_Click"/>
 
     </Grid>
 </Window>
