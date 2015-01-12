@@ -183,7 +183,6 @@
     <Content Include="css\fonts\fontawesome\css\font-awesome.css" />
     <Content Include="css\fonts\fontawesome\css\font-awesome.min.css" />
     <Content Include="css\fonts\fontawesome\font\fontawesome-webfont.svg" />
-    <Content Include="css\fonts\weathericons-regular-webfont.svg" />
     <Content Include="css\img\breadcrumbs-bg.gif" />
     <Content Include="css\img\bx_loader.gif" />
     <Content Include="css\img\controls.png" />
@@ -349,12 +348,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ShortHorn\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="css\fonts\weathericons-regular-webfont.eot" />
-    <Content Include="css\fonts\weathericons-regular-webfont.ttf" />
-    <Content Include="css\fonts\weathericons-regular-webfont.woff" />
-    <Content Include="css\fonts\WeatherIcons-Regular.otf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Users\Profile.cshtml">

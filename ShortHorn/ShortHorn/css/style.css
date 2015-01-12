@@ -27,6 +27,11 @@
     src: url('../Fonts/yanone.otf');
 }
 
+@font-face {
+    font-family: Bevan;
+    src: url('../Fonts/Bevan.ttf');
+}
+
 /*---------------------------------
 	OVERRIDES
 -----------------------------------*/
@@ -108,7 +113,7 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 }
 
 #lay_top_menu h1, h2 {
-    font-family: Hyped, Impact;
+    font-family: Yanone;
     color: #fff;
 }
 
