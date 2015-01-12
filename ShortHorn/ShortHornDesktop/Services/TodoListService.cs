@@ -38,5 +38,31 @@ namespace ShortHorn.Desktop.Services
                 }
             }
         }
+
+        public async Task<bool> CreateList(string name, string description = null, bool isFavourite = false)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.apiBaseUrl);
+                this.resetClient(client);
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/lists", new TodoListDTO()
+                {
+                    Description = description,
+                    IsFavourite = isFavourite,
+                    Name = name,
+                    Token = this.apiUserToken
+                });
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

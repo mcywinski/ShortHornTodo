@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ShortHorn.Desktop.ViewModels;
+using ShortHorn.DataTransferObjects;
 
 namespace ShortHorn.Desktop.Windows
 {
@@ -21,6 +22,8 @@ namespace ShortHorn.Desktop.Windows
     public partial class TodoListViewWindow : Window
     {
         private TodoListViewViewModel todoListViewViewModel;
+
+        private CreateTodoListWindow createTodoListWindow = null;
 
         public TodoListViewWindow()
         {
@@ -32,6 +35,23 @@ namespace ShortHorn.Desktop.Windows
         private async void ListBox_Loaded(object sender, RoutedEventArgs e)
         {
             await this.todoListViewViewModel.GetTodoLists();
+        }
+
+        private async void btnAddList_Click(object sender, RoutedEventArgs e)
+        {
+            createTodoListWindow = new CreateTodoListWindow();
+            createTodoListWindow.ShowDialog();
+            createTodoListWindow = null;
+            await this.todoListViewViewModel.GetTodoLists();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.listBoxTodoLists.SelectedItems.Count != 0)
+            {
+                //TODO: Select todo itemh
+                //this.todoListViewViewModel.GetTodoItems(this.listBoxTodoLists.SelectedItems[0])
+            }
         }
     }
 }

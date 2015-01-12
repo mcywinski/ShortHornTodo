@@ -10,7 +10,7 @@ using ShortHorn.DataTransferObjects;
 
 namespace ShortHorn.Desktop.ViewModels
 {
-    public class TodoListViewViewModel : INotifyPropertyChanged
+    public class TodoListViewViewModel : BaseViewModel
     {
         public TodoListViewViewModel()
         {
@@ -24,19 +24,6 @@ namespace ShortHorn.Desktop.ViewModels
         {
             get { return location; }
             set { location = value; onPropertyChanged(this, "Location"); }
-        }
-
-        // Declare the PropertyChanged event
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // OnPropertyChanged will raise the PropertyChanged event passing the
-        // source property that is being updated.
-        private void onPropertyChanged(object sender, string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(sender, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         public async Task<bool> GetTodoLists()
