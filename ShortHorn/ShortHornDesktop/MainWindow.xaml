@@ -1,0 +1,14 @@
+﻿<Window x:Class="ShortHorn.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel Height="150" Margin="10,10,10,0" VerticalAlignment="Top">
+            <Label Content="Your login:"/>
+            <TextBox x:Name="txtBoxLogin" Height="23" TextWrapping="Wrap" />
+            <Label Content="You password:"/>
+            <PasswordBox x:Name="txtBoxPassword" Height="23"/>
+            <Button x:Name="btnLogin" Content="Sign in" Height="23" Click="btnLogin_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
