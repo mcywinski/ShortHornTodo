@@ -2,7 +2,6 @@
     $scope.loginData = {};
     $scope.registerData = {};
     $scope.changeData = {};
-    $scope.currentUser = {};
 
     $scope.executeLogin = function () {
         $http.post('/api/users/login', {
@@ -50,9 +49,9 @@
             city: $scope.changeData.city,
             country: $scope.changeData.country
         }).success(function (data, status) {
-           
+            $scope.successUserPropertiesSave = false;
         }).error(function (data, status) {
-            alert('Problem with updating the item. Try again');
+            $scope.errorUserPropertiesSave = true;
         });
     };
 
