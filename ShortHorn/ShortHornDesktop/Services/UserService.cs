@@ -7,18 +7,23 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using ShortHorn.DataTransferObjects;
 
-namespace ShortHornDesktop.Services
+namespace ShortHorn.Desktop.Services
 {
     class UserService : BaseService
     {
-        
-
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="apiBaseUrl">The base URL of API.</param>
         public UserService(string apiBaseUrl)
-            : base(apiBaseUrl)
-        {
+            : base(apiBaseUrl) { }
 
-        }
-
+        /// <summary>
+        /// Fetches login token from the API.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">User password.</param>
+        /// <returns>API authorization token, null if authentication failed.</returns>
         public async Task<string> Login(string login, string password)
         {
             using (var client = new HttpClient())
@@ -26,8 +31,9 @@ namespace ShortHornDesktop.Services
                 client.BaseAddress = new Uri(this.apiBaseUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.Timeout = new TimeSpan(0, 0, 5);
 
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/users", new LoginCredentialsDTO()
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/users/login", new LoginCredentialsDTO()
                 {
                     Login = login,
                     Password = password
@@ -35,7 +41,11 @@ namespace ShortHornDesktop.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return string.Empty;
+                    LoginTokenDTO token = await response.Content.ReadAsAsync<LoginTokenDTO>();
+                    if (token.Success)
+                        return token.Token;
+                    else
+                        return null;
                 }
                 else
                 {
