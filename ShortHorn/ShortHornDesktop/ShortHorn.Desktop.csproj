@@ -71,6 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\TodoItemsService.cs" />
     <Compile Include="Services\TodoListService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

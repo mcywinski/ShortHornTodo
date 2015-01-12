@@ -45,12 +45,24 @@ namespace ShortHorn.Desktop.Windows
             await this.todoListViewViewModel.GetTodoLists();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.listBoxTodoLists.SelectedItems.Count != 0)
             {
-                //TODO: Select todo itemh
-                //this.todoListViewViewModel.GetTodoItems(this.listBoxTodoLists.SelectedItems[0])
+                TodoListDTO selectedItem = (TodoListDTO)this.listBoxTodoLists.SelectedItems[0];
+                this.todoListViewViewModel.CurrentListId = selectedItem.Id;
+                await this.todoListViewViewModel.GetTodoItems();
+            }
+        }
+
+        private void btnAddTodoItem_Click(object sender, RoutedEventArgs e)
+        {
+            string title = this.txtBoxNewTodoItem.Text;
+            this.txtBoxNewTodoItem.Text = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                this.todoListViewViewModel.CreateTodoItem(title);
             }
         }
     }
