@@ -5,11 +5,11 @@
 <div ng-controller="usersController" class="todoBox" style="padding:10px;">
     <div> 
         <h2>Account properties</h2>
-        <div ng-show="statusUserPropertiesSave == 2" class="notice error">
-            <i class="icon-remove-sign icon-large"></i> Error while saving user properties!
+        <div ng-show="statusUserOperation >= 4 && statusUserOperation <= 6" class="notice error">
+            <i class="icon-remove-sign icon-large"></i> {{messageStatusUserOperation}}
         </div>
-        <div ng-show="statusUserPropertiesSave == 1" class="notice success">
-            <i class="icon-ok icon-large"></i> All changes saved
+        <div ng-show="statusUserOperation >= 1 && statusUserOperation <= 3" class="notice success">
+            <i class="icon-ok icon-large"></i> {{messageStatusUserOperation}}
         </div>
         <p>
             <input type="text" ng-model="changeData.login" placeholder="Type your desired login" class="col_12">
