@@ -62,5 +62,23 @@ namespace ShortHorn.Desktop.Services
                     return false;
             }
         }
+
+        public async Task<bool> UpdateItem(TodoItemDTO item)
+        {
+            item.Token = AppState.ApiLoginToken;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.apiBaseUrl);
+                this.resetClient(client);
+
+                HttpResponseMessage response = await client.PutAsJsonAsync("api/items", item);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }
