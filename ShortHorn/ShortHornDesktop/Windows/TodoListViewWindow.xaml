@@ -6,19 +6,20 @@
         Title="ShortHorn Todo" Height="418" Width="623">
     <Grid>
         <ListBox x:Name="listBoxTodoLists" HorizontalAlignment="Left" Margin="10,10,0,45" Width="200" ItemsSource="{Binding TodoLists}" DisplayMemberPath="Name" Loaded="ListBox_Loaded" SelectionChanged="ListBox_SelectionChanged"/>
-        <Button x:Name="btnAddList" Content="+" HorizontalAlignment="Left" Margin="10,347,0,0" VerticalAlignment="Top" Width="20
-                " Click="btnAddList_Click" Height="23"/>
+        <Button x:Name="btnAddList" Content="+" HorizontalAlignment="Left" Margin="10,0,0,17" Width="20
+                " Click="btnAddList_Click" Height="23" VerticalAlignment="Bottom"/>
         <ListView HorizontalAlignment="Left" Margin="215,10,0,45" Width="200" ItemsSource="{Binding TodoItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <uc:TodoItemRow>
-                        
+
                     </uc:TodoItemRow>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="btnAddTodoItem" Content="+" HorizontalAlignment="Left" Margin="215,347,0,0" VerticalAlignment="Top" Width="20" Click="btnAddTodoItem_Click" Height="23"/>
-        <TextBox x:Name="txtBoxNewTodoItem" HorizontalAlignment="Left" Height="23" Margin="240,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="btnAddTodoItem" Content="+" HorizontalAlignment="Left" Margin="215,0,0,17" Width="20" Click="btnAddTodoItem_Click" Height="23" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtBoxNewTodoItem" HorizontalAlignment="Left" Margin="240,0,0,17" TextWrapping="Wrap" Text="" Width="175" Height="23" VerticalAlignment="Bottom"/>
+        <GroupBox Header="Todo item details" Margin="420,10,10,17"/>
 
     </Grid>
 </Window>
