@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace ShortHorn.Desktop.ViewModels
 {
+    /// <summary>
+    /// Base viewmodel from which implements logic reusable in other viewmodels.
+    /// </summary>
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         // Declare the PropertyChanged event

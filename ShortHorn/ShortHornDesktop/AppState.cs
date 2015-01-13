@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace ShortHorn.Desktop
 {
+    /// <summary>
+    /// Stores current settings regarding user and application status.
+    /// </summary>
     public class AppState
     {
 
         #region public fields
 
+        /// <summary>
+        /// The API token for user authorization.
+        /// </summary>
         public static string ApiLoginToken { get; set; }
 
         #endregion
 
+        /// <summary>
+        /// The constructor.
+        /// </summary>
         public AppState()
         {
 

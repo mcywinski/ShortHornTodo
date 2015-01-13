@@ -10,13 +10,22 @@ namespace ShortHorn.Desktop.Services
 {
     public class TodoListService : BaseService
     {
+        /// <summary>
+        /// The API token used for user authentication.
+        /// </summary>
         private string apiUserToken;
 
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="apiBaseUrl">The root URL of API.</param>
+        /// <param name="apiUserToken">The API token for authorization.</param>
         public TodoListService(string apiBaseUrl, string apiUserToken)
             : base(apiBaseUrl)
         {
             this.apiUserToken = apiUserToken;
         }
+
 
         public async Task<List<TodoListDTO>> GetAllLists()
         {
