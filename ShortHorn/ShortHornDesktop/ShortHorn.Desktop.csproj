@@ -74,6 +74,9 @@
     <Compile Include="Services\TodoItemsService.cs" />
     <Compile Include="Services\TodoListService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UserControls\TodoItemDetails.xaml.cs">
+      <DependentUpon>TodoItemDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TodoItemRow.xaml.cs">
       <DependentUpon>TodoItemRow.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\TodoItemDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\TodoItemRow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
