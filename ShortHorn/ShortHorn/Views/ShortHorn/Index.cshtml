@@ -20,6 +20,12 @@
     </div>
     <div ng-class="{'col_6' : isItemDetailsPaneEnabled , 'col_9' : !isItemDetailsPaneEnabled}">
         <div class="col_12" ng-show="!isFavouriteListVisible">
+            <div ng-show="statusTodoOperation >= 4 && statusTodoOperation <= 11" class="notice error">
+                <i class="icon-remove-sign icon-large"></i> {{messageStatusTodoOperation}}
+            </div>
+            <div ng-show="statusTodoOperation >= 1 && statusTodoOperation <= 3" class="notice success">
+                <i class="icon-ok icon-large"></i> {{messageStatusTodoOperation}}
+            </div>
             <input type="text" ng-model="newItemName" ng-keypress="executeCreateTodoItem($event)" placeholder="Add a todo item" class="col_12" />
         </div>
         <div class="col_12">
