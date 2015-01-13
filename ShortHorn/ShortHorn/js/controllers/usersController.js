@@ -2,6 +2,20 @@
     $scope.loginData = {};
     $scope.registerData = {};
     $scope.changeData = {};
+    $scope.statusUserOperation = 0;
+    $scope.messageStatusUserOperation = '';
+
+    /*
+    Status codes:
+        1 - Success (login)
+        2 - Success (register)
+        3 - Success (save properties)
+        ================================
+        4 - Error (login)
+        5 - Error (register)
+        6 - Error (save properties)
+
+    */
 
     $scope.executeLogin = function () {
         $http.post('/api/users/login', {
@@ -11,9 +25,11 @@
             SetLoginToken(data.token);
             $scope.loginData = {};
             $location.path('/');
-            //TODO alert z sukcesem logowania
+            $scope.statusUserOperation = 1; // Success (login)
+            $scope.messageStatusUserOperation = 'Login succeed!';
         }).error(function (data, status) {
-            alert('Problem w trakcie logowania!');
+            $scope.statusUserOperation = 4; // Error (login)
+            $scope.messageStatusUserOperation = 'Error while singing in. Refresh the page and try again.';
         });
     };
 
@@ -27,32 +43,34 @@
             emailConfirmed: $scope.registerData.emailConfirmed
         }).success(function (data, status) {
             $scope.registerData = {};
-            $location.path('/');
-            //TODO alert z sukcesem rejestracji
+            $scope.statusUserOperation = 2; // Success (register)
+            $scope.messageStatusUserOperation = 'Register succeed! Please check your email.';
         }).error(function () {
-            alert('Problem w trakcie rejestracji!');
+            $scope.statusUserOperation = 5; // Error (register)
+            $scope.messageStatusUserOperation = 'Error! Register failed. Refresh the page and try again.';
+        });
+
+        $scope.$on('$viewContentLoaded', function () {
+            if ($location.absUrl().indexOf('logout') > -1) {
+                DeleteLoginToken();
+                $location.path('/');
+            }
         });
     };
 
-    $scope.$on('$viewContentLoaded', function () {
-        if ($location.absUrl().indexOf('logout') > -1) {
-            DeleteLoginToken();
-            $location.path('/');
-        }
+        $scope.executeUserPropertiesSave = function () {
+            $http.put('/api/users', {
+                token: GetLoginToken(),
+                login: $scope.changeData.login,
+                email: $scope.changeData.email,
+                city: $scope.changeData.city,
+                country: $scope.changeData.country
+            }).success(function (data, status) {
+                $scope.statusUserOperation = 3; //Success (save properties)
+                $scope.messageStatusUserOperation = 'Properties successfully saved!';
+            }).error(function (data, status) {
+                $scope.statusUserOperation = 6; //Error (save properties)
+                $scope.messageStatusUserOperation = 'Error while saving your properties. Refresh the page and try again.';
+            });
+        };
     });
-
-    $scope.executeUserPropertiesSave = function () {
-        $http.put('/api/users', {
-            token: GetLoginToken(),
-            login: $scope.changeData.login,
-            email: $scope.changeData.email,
-            city: $scope.changeData.city,
-            country: $scope.changeData.country
-        }).success(function (data, status) {
-            $scope.statusUserPropertiesSave = 1; //1 - success, 2 - error
-        }).error(function (data, status) {
-            $scope.statusUserPropertiesSave = 2;
-        });
-    };
-
-});

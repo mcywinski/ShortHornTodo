@@ -139,7 +139,8 @@ namespace ShortHorn.Controllers.API
                 Name = item.Name,
                 IsFavourite = false,
                 IsFinished = false,
-                ParentList = parentList
+                ParentList = parentList,
+                DateFinish = DateTime.Today
             };
             if (!itemManager.CreateItem(dbItem))
             {
