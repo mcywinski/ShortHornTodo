@@ -80,7 +80,8 @@ namespace ShortHorn.Controllers.API
                     IsFavourite = rawTodoitem.IsFavourite,
                     IsFinished = rawTodoitem.IsFinished,
                     Name = rawTodoitem.Name,
-                    DateFinish = rawTodoitem.DateFinish
+                    DateFinish = rawTodoitem.DateFinish,
+                    ParentListId = rawTodoitem.ParentList.Id
                 });
             }
 
