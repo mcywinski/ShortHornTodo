@@ -12,7 +12,7 @@ namespace ShortHorn.Desktop.ViewModels
 
         // OnPropertyChanged will raise the PropertyChanged event passing the
         // source property that is being updated.
-        protected void onPropertyChanged(object sender, string propertyName)
+        protected virtual void onPropertyChanged(object sender, string propertyName)
         {
             if (this.PropertyChanged != null)
             {

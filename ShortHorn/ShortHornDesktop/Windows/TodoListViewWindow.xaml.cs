@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ShortHorn.Desktop.ViewModels;
 using ShortHorn.DataTransferObjects;
+using ShortHorn.Desktop.ViewModels.UserControls;
 
 namespace ShortHorn.Desktop.Windows
 {
@@ -63,6 +64,26 @@ namespace ShortHorn.Desktop.Windows
             if (!string.IsNullOrWhiteSpace(title))
             {
                 this.todoListViewViewModel.CreateTodoItem(title);
+            }
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                TodoItemDTO selectedItem = (TodoItemDTO)listView.SelectedItems[0];
+                TodoItemDetailsViewModel viewModel = new TodoItemDetailsViewModel(selectedItem);
+                viewModel.ItemUpdateCompleted += async () =>
+                {
+                    await this.todoListViewViewModel.GetTodoItems();
+                    
+                };
+                this.ItemDetailsPane.DataContext = viewModel;
+            }
+            else
+            {
+                this.ItemDetailsPane.DataContext = null;
             }
         }
     }

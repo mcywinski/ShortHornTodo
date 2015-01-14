@@ -83,6 +83,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CreateTodoListViewModel.cs" />
     <Compile Include="ViewModels\TodoListViewViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\TodoItemDetailsViewModel.cs" />
     <Compile Include="Windows\CreateTodoListWindow.xaml.cs">
       <DependentUpon>CreateTodoListWindow.xaml</DependentUpon>
     </Compile>

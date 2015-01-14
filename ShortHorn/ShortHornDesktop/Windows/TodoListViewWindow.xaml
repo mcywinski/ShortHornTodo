@@ -8,7 +8,7 @@
         <ListBox x:Name="listBoxTodoLists" HorizontalAlignment="Left" Margin="10,10,0,45" Width="150" ItemsSource="{Binding TodoLists}" DisplayMemberPath="Name" Loaded="ListBox_Loaded" SelectionChanged="ListBox_SelectionChanged"/>
         <Button x:Name="btnAddList" Content="+" HorizontalAlignment="Left" Margin="10,0,0,17" Width="20
                 " Click="btnAddList_Click" Height="23" VerticalAlignment="Bottom"/>
-        <ListView Margin="165,10,250,45" ItemsSource="{Binding TodoItems}">
+        <ListView Margin="165,10,250,45" ItemsSource="{Binding TodoItems}" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <uc:TodoItemRow>
@@ -19,7 +19,7 @@
         </ListView>
         <Button x:Name="btnAddTodoItem" Content="+" HorizontalAlignment="Left" Margin="165,0,0,17" Width="20" Click="btnAddTodoItem_Click" Height="23" VerticalAlignment="Bottom"/>
         <TextBox x:Name="txtBoxNewTodoItem" Margin="190,0,250,17" TextWrapping="Wrap" Text="" Height="23" VerticalAlignment="Bottom"/>
-        <uc:TodoItemDetails Margin="0,10,10,45" HorizontalAlignment="Right" Width="235"></uc:TodoItemDetails>
+        <uc:TodoItemDetails x:Name="ItemDetailsPane" Margin="0,10,10,45" HorizontalAlignment="Right" Width="235"></uc:TodoItemDetails>
 
     </Grid>
 </Window>
