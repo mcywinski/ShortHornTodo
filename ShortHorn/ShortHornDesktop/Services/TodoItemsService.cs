@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ShortHorn.DataTransferObjects;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ShortHorn.Desktop.Services
 {
@@ -107,6 +109,37 @@ namespace ShortHorn.Desktop.Services
                 else
                     return false;
             }
+        }
+
+        public async Task<string> FetchWeather(DateTime date, string city, string country)
+        {
+            DateTime dateHelper = DateTime.Today;
+            
+            if(date != null && city == null && country == null)
+            {
+                if((date - dateHelper).TotalDays >= 0 && (date - dateHelper).TotalDays <= 13)
+                {
+                    string uri = "api.openweathermap.org/data/2.5/forecast/daily?q=Warsaw,pl&cnt=14&mode=json";
+                    var httpClient = new HttpClient();
+                    string rawJson = await httpClient.GetStringAsync(uri);
+                    JObject o = JObject.Parse(rawJson);
+                    
+                }
+
+            }
+            else if (date != null && city != null && country != null)
+            {
+                if((date - dateHelper).TotalDays >= 0 && (date - dateHelper).TotalDays <= 13)
+                {
+                    string uri = "api.openweathermap.org/data/2.5/forecast/daily?q="+ city + "," + country + "&cnt=14&mode=json";
+                    var httpClient = new HttpClient();
+                    //var weatherJSON = System.Web.Helpers.Json.Decode(await httpClient.GetStringAsync(uri));
+                }
+                
+            }
+
+            return string.Empty;
+
         }
     }
 }

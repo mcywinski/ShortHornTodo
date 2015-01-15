@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShortHorn.Desktop.Services;
 using ShortHorn.Desktop.Windows;
+using ShortHorn.DataTransferObjects;
 
 namespace ShortHorn.Desktop
 {
@@ -41,6 +42,11 @@ namespace ShortHorn.Desktop
             {
                 AppState.ApiLoginToken = token;
                 this.Visibility = Visibility.Collapsed;
+
+                UserDTO details = await userService.GetUserDetails(token);
+                AppState.Country = details.Country;
+                AppState.City = details.City;
+
                 windowTodos = new TodoListViewWindow();
                 windowTodos.Show();
             }

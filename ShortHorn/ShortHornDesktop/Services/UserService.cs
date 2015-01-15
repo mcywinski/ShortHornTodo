@@ -51,5 +51,28 @@ namespace ShortHorn.Desktop.Services
                 }
             }
         }
+
+        public async Task<UserDTO> GetUserDetails(string token)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.apiBaseUrl);
+                this.resetClient(client);
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/users/getdetails", new BaseDTO()
+                {
+                    Token = token
+                });
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<UserDTO>();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

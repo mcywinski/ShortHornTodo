@@ -212,5 +212,25 @@ namespace ShortHorn.Controllers.API
                 ExceptionHelper.ThrowHttpResponseException(ExceptionHelper.ReasonPhrases.DatabaseException);
             }
         }
+
+        [HttpPost]
+        public UserDTO GetDetails(BaseDTO parameters)
+        {
+            this.AuthenticateByDTO(parameters);
+
+            UserManager um = new UserManager(this.dbContext);
+            User u = um.GetUserByToken(parameters.Token);
+
+            UserDTO result = new UserDTO()
+            {
+                City = u.City,
+                Country = u.Country,
+                Email = u.Email,
+                Id = u.Id,
+                Login = u.Login
+            };
+
+            return result;
+        }
     }
 }

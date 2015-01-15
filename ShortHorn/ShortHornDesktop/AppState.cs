@@ -19,6 +19,10 @@ namespace ShortHorn.Desktop
         /// </summary>
         public static string ApiLoginToken { get; set; }
 
+        public static string Country { get; set; }
+
+        public static string City { get; set; }
+
         #endregion
 
         /// <summary>
