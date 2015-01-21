@@ -48,7 +48,8 @@ namespace ShortHorn.Desktop
                 AppState.City = details.City;
 
                 windowTodos = new TodoListViewWindow();
-                windowTodos.Show();
+                windowTodos.ShowDialog();
+                this.Close();
             }
         }
     }

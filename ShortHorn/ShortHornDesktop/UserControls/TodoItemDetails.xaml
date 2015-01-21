@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignWidth="300" Height="343">
     <Grid>
-        <GroupBox Header="Item details" Loaded="GroupBox_Loaded">
+        <GroupBox Header="Item details" Loaded="GroupBox_Loaded" FontWeight="Bold">
             <Grid>
                 <Label Content="Task name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <TextBox Height="23" Margin="34,41,10,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top"/>
