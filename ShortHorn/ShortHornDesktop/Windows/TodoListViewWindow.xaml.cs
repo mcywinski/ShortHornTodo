@@ -75,7 +75,14 @@ namespace ShortHorn.Desktop.Windows
                 this.ItemDetailsPane.Visibility = Visibility.Visible;
                 TodoItemDTO selectedItem = (TodoItemDTO)listView.SelectedItems[0];
                 TodoItemDetailsViewModel viewModel = new TodoItemDetailsViewModel(selectedItem);
-                await viewModel.SetWeather();
+                try
+                {
+                    await viewModel.SetWeather();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occured while downloading the weather status: " + ex.Message);
+                }
                 viewModel.ItemUpdateCompleted += async () =>
                 {
                     await this.todoListViewViewModel.GetTodoItems();
