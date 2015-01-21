@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ShortHorn.DataTransferObjects;
 using System.ComponentModel;
 using ShortHorn.Desktop.Services;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace ShortHorn.Desktop.ViewModels.UserControls
 {
@@ -18,7 +21,6 @@ namespace ShortHorn.Desktop.ViewModels.UserControls
 
         public TodoItemDetailsViewModel()
         {
-
         }
 
         /// <summary>
@@ -32,6 +34,8 @@ namespace ShortHorn.Desktop.ViewModels.UserControls
             this.IsFinished = item.IsFinished;
             this.isFavourite = item.IsFavourite;
             this.DateFinish = item.DateFinish;
+
+            this.todoItemsService = new TodoItemsService(ConfigurationManager.GetApiBaseAddress(), AppState.ApiLoginToken);
         }
 
         #endregion
@@ -48,10 +52,17 @@ namespace ShortHorn.Desktop.ViewModels.UserControls
             }
         }
 
+        private void noWeatherVisible()
+        {
+            this.CloudyVisible = Visibility.Collapsed;
+            this.SunVisible = Visibility.Collapsed;
+            this.RainVisible = Visibility.Collapsed;
+            this.SnowVisible = Visibility.Collapsed;
+        }
+
         private async Task updateItem()
         {
-            TodoItemsService service = new TodoItemsService(ConfigurationManager.GetApiBaseAddress(), AppState.ApiLoginToken);
-            bool result = await service.UpdateItem(this.ToDTO());
+            bool result = await this.todoItemsService.UpdateItem(this.ToDTO());
 
             if (!result)
             {
@@ -80,14 +91,92 @@ namespace ShortHorn.Desktop.ViewModels.UserControls
             };
         }
 
+        public async Task<bool> SetWeather()
+        {
+            DateTime today = DateTime.Today;
+            if (today > this.dateFinish.Value)
+            {
+                noWeatherVisible();
+                return false;
+            }
+            else
+            {
+                int timeDiff = (this.dateFinish.Value - today).Days;
+                if (timeDiff <= 14)
+                {
+                    noWeatherVisible();
+                    string weather = await this.todoItemsService.FetchWeather(this.DateFinish.Value, AppState.City, AppState.Country);
+                    weather = weather.ToLower();
+                    if (weather == "snow")
+                    {
+                        this.SnowVisible = Visibility.Visible;
+                    }
+                    else if (weather == "rain")
+                    {
+                        this.RainVisible = Visibility.Visible;
+                    }
+                    else if (weather == "clouds")
+                    {
+                        this.CloudyVisible = Visibility.Visible;
+                    }
+                    else
+                    {
+                        this.SunVisible = Visibility.Visible;
+                    }
+                    return true;
+                }
+                else
+                {
+                    noWeatherVisible();
+                    return false;
+                }
+            }
+            
+            
+        }
+
         #endregion
 
         #region properties
+
+        private TodoItemsService todoItemsService;
 
         public new event PropertyChangedEventHandler PropertyChanged;
 
         public delegate void itemUpdateCompleted();
         public event itemUpdateCompleted ItemUpdateCompleted = null;
+
+        public Visibility CloudyVisible
+        {
+            get { return cloudyVisible; }
+            set { cloudyVisible = value; onPropertyChanged(this, "CloudyVisible"); }
+        }
+
+        private Visibility cloudyVisible;
+
+        public Visibility RainVisible
+        {
+            get { return rainVisible; }
+            set { rainVisible = value; onPropertyChanged(this, "RainVisible"); }
+        }
+
+        private Visibility rainVisible;
+
+        public Visibility SnowVisible
+        {
+            get { return snowVisible; }
+            set { snowVisible = value; onPropertyChanged(this, "SnowVisible"); }
+        }
+
+        private Visibility snowVisible;
+
+        public Visibility SunVisible
+        {
+            get { return sunVisible; }
+            set { sunVisible = value; onPropertyChanged(this, "SunVisible"); }
+        }
+
+        private Visibility sunVisible;
 
         /// <summary>
         /// Todo item ID.

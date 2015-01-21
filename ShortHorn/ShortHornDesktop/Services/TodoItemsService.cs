@@ -113,32 +113,30 @@ namespace ShortHorn.Desktop.Services
 
         public async Task<string> FetchWeather(DateTime date, string city, string country)
         {
-            DateTime dateHelper = DateTime.Today;
-            
-            if(date != null && city == null && country == null)
-            {
-                if((date - dateHelper).TotalDays >= 0 && (date - dateHelper).TotalDays <= 13)
-                {
-                    string uri = "api.openweathermap.org/data/2.5/forecast/daily?q=Warsaw,pl&cnt=14&mode=json";
-                    var httpClient = new HttpClient();
-                    string rawJson = await httpClient.GetStringAsync(uri);
-                    JObject o = JObject.Parse(rawJson);
-                    
-                }
+            string uri = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "," + country + "&cnt=14&mode=json";
+            var httpClient = new HttpClient();
+            var weatherJSON = await httpClient.GetStringAsync(new Uri(uri));
+            JObject d = JObject.Parse(weatherJSON);
+            var list = d["list"];
 
-            }
-            else if (date != null && city != null && country != null)
+            var rawDates = from item in list
+                        select (int)item["dt"];
+
+            int properRawDate = 0;
+            foreach (int rawDate in rawDates)
             {
-                if((date - dateHelper).TotalDays >= 0 && (date - dateHelper).TotalDays <= 13)
+                DateTime checkDate = new DateTime(1970, 1, 1).AddSeconds(rawDate);
+                if (checkDate.Day == date.Day)
                 {
-                    string uri = "api.openweathermap.org/data/2.5/forecast/daily?q="+ city + "," + country + "&cnt=14&mode=json";
-                    var httpClient = new HttpClient();
-                    //var weatherJSON = System.Web.Helpers.Json.Decode(await httpClient.GetStringAsync(uri));
+                    properRawDate = rawDate;
+                    break;
                 }
-                
             }
 
-            return string.Empty;
+            JToken weatherInformation = (from item in list
+                                            where (int)item["dt"] == properRawDate
+                                            select item).First();
+            return weatherInformation["weather"].First["main"].ToString();
 
         }
     }

@@ -3,17 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300" Height="343">
     <Grid>
-        <GroupBox Header="Item details">
+        <GroupBox Header="Item details" Loaded="GroupBox_Loaded">
             <Grid>
                 <Label Content="Task name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <TextBox Height="23" Margin="34,41,10,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top"/>
                 <CheckBox IsChecked="{Binding IsFinished}" Content="" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
                 <Calendar Margin="34,69,0,0" VerticalAlignment="Top" Height="170" SelectedDate="{Binding DateFinish}" HorizontalAlignment="Left" Width="186"/>
                 <CheckBox IsChecked="{Binding IsFavourite}" Content="Favourite" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="32" Source="/ShortHornDesktop;component/Assets/WeatherIcons/cloud.png" RenderTransformOrigin="0.438,0.688" Visibility="{Binding CloudyVisible}"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="32" Source="/ShortHornDesktop;component/Assets/WeatherIcons/rain.png" RenderTransformOrigin="0.438,0.688" Visibility="{Binding RainVisible}"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="32" Source="/ShortHornDesktop;component/Assets/WeatherIcons/snow.png" RenderTransformOrigin="0.438,0.688" Visibility="{Binding SnowVisible}"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="32" Source="/ShortHornDesktop;component/Assets/WeatherIcons/sun.png" RenderTransformOrigin="0.438,0.688" Visibility="{Binding SunVisible}"/>
             </Grid>
         </GroupBox>
+        
     </Grid>
 </UserControl>

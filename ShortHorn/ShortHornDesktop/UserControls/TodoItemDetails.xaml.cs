@@ -24,5 +24,10 @@ namespace ShortHorn.Desktop.UserControls
         {
             InitializeComponent();
         }
+
+        private void GroupBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

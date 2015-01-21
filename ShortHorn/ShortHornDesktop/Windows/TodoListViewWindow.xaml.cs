@@ -67,13 +67,15 @@ namespace ShortHorn.Desktop.Windows
             }
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListView listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
+                this.ItemDetailsPane.Visibility = Visibility.Visible;
                 TodoItemDTO selectedItem = (TodoItemDTO)listView.SelectedItems[0];
                 TodoItemDetailsViewModel viewModel = new TodoItemDetailsViewModel(selectedItem);
+                await viewModel.SetWeather();
                 viewModel.ItemUpdateCompleted += async () =>
                 {
                     await this.todoListViewViewModel.GetTodoItems();
